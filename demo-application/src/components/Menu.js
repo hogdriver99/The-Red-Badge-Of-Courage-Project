@@ -5,7 +5,7 @@ import Button from './Button'
 
 const Menu = () => {
     return (
-        <div className='menu'>
+        <div className='menu' style={menuStyle}>
             <div>
                 <Icon image={nav}/>
                 <Icon image={home}/>
@@ -19,3 +19,6 @@ const Menu = () => {
 
 export default Menu
 
+const menuStyle = {
+    height: '70px',
+}
