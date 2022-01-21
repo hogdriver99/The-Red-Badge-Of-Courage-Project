@@ -1,9 +1,8 @@
 
-const Icon = ({image, name}) => {
+const Icon = ({image, name, id}) => {
     return (
         <>
-            <input className={getIconName(name)} type="image" src={image} style={iconStyle}/>
-            {/* add alt text */}
+            <input className={getIconName(name)} id={name} type="image" src={image} style={iconStyle}/>
         </>
     )
 }

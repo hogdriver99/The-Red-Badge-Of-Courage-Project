@@ -1,17 +1,21 @@
 import React from 'react';
-import Button from './Button';
+import Icon from './Icon';
+import sBtnRight from '../images/btn-single-right.png'
+import dBtnRight from '../images/btn-double-right.png'
+import sBtnLeft from '../images/btn-single-left.png'
+import dBtnLeft from '../images/btn-double-left.png'
 
 const ControlPanel = () => {
   return (
     <div className='controlPanel'>
         <div>
-          <Button text='<<'/>
-          <Button text='<'/>
+          <Icon image={dBtnLeft} name='backChapter'/>
+          <Icon image={sBtnLeft} name='backpage'/>
         </div>
         <h3 className='page-number'>Page</h3>
         <div>
-          <Button text='>'/>
-          <Button text='>>'/>
+          <Icon image={sBtnRight} name='nextpage'/>
+          <Icon image={dBtnRight} name='nextChapter'/>
         </div>
     </div>
   )
