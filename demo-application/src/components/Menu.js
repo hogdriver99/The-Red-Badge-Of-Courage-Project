@@ -7,12 +7,11 @@ const Menu = () => {
     return (
         <div className='menu' style={menuStyle}>
             <div>
-                <Icon image={nav}/>
-                <Icon image={home}/>
+                <Icon image={nav} name='nav'/>
+                <Icon image={home} name='home'/>
             </div>
             <h1>The Red Badge of Courage</h1>
             <Button text='Log In'/>
-            {/* <button className='btn'>Log In</button> */}
         </div>
     )
 }
