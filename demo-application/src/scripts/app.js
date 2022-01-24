@@ -4,23 +4,54 @@ var DOMstrings = {
     pageRight: '.page-right'
 };
 
+var jsFileLocation;
+var readFile;
+var RespType;
+var FileType;
 
-//document.querySelector(DOMstrings.pageNumber).textContent = 'Page 1-2';
+export function AppStartUp() {
+    //document.querySelector(DOMstrings.pageNumber).textContent = 'Page 1-2';
+    document.addEventListener("DOMContentLoaded", importFileStage(importFile));
+    awaitJQuery(loadApp);
+}
 
-document.addEventListener("DOMContentLoaded", importFile);
-document.getElementById("nextpage").addEventListener("click", nextPage);
-document.getElementById("backpage").addEventListener("click", backPage);
-//document.addEventListener("DOMContentLoaded", runPageGet);
+function awaitJQuery(callback) {
+    var waitForLoad = function () {
+        if (typeof jQuery != "undefined") {
+            console.log("jquery loaded..");
+            console.log(typeof jQuery)
+            callback()
+            // invoke any methods defined in your JS files to begin execution       
+        } else {
+            console.log("jquery not loaded..");
+            window.setTimeout(waitForLoad, 500);
+        }
+    };
+    window.setTimeout(waitForLoad, 500); 
+}
 
-document.cookie = "pagenum=1";
+function loadApp(){
+    jsFileLocation = $('script[src*=app]').attr('src');
+    jsFileLocation = jsFileLocation.replace("app.js", "");
+    jsFileLocation = jsFileLocation + "73.txt";
 
-var jsFileLocation = $('script[src*=app]').attr('src');
-jsFileLocation = jsFileLocation.replace("app.js", "");
-jsFileLocation = jsFileLocation + "73.txt";
+    console.log("Finished jQuery");
 
-var readFile = [];
-var RespType = "blob";
-var FileType = "text/plain";
+    document.getElementById("nextpage").addEventListener("click", nextPage);
+    document.getElementById("backpage").addEventListener("click", backPage);
+    //document.addEventListener("DOMContentLoaded", runPageGet);
+
+    document.cookie = "pagenum=1";
+
+    readFile = [];
+    RespType = "blob";
+    FileType = "text/plain";
+}
+
+function importFileStage(callback) {
+    awaitJQuery(callback);
+}
+
 
 function handleFile(X){
     //var blobUri = URL.createObjectURL(new Blob([X], {type: "text/plain"}));

@@ -4,6 +4,7 @@ import './index.css';
 // import './scripts/app'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AppStartUp } from './scripts/app.js';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,6 +12,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+document.addEventListener("load", AppStartUp());
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
