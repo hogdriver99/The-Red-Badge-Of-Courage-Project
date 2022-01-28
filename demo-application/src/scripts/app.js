@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import raw from 'raw.macro';
+
 var DOMstrings = {
     pageNumber: '.page-number',
     pageLeft: '.page-left',
@@ -11,7 +14,7 @@ var FileType;
 
 export function AppStartUp() {
     //document.querySelector(DOMstrings.pageNumber).textContent = 'Page 1-2';
-    document.addEventListener("DOMContentLoaded", importFileStage(importFile));
+    //document.addEventListener("DOMContentLoaded", importFileStage(importFile));
     awaitJQuery(loadApp);
 }
 
@@ -31,10 +34,6 @@ function awaitJQuery(callback) {
 }
 
 function loadApp(){
-    jsFileLocation = $('script[src*=app]').attr('src');
-    jsFileLocation = jsFileLocation.replace("app.js", "");
-    jsFileLocation = jsFileLocation + "73.txt";
-
     console.log("Finished jQuery");
 
     document.getElementById("nextpage").addEventListener("click", nextPage);
@@ -46,21 +45,26 @@ function loadApp(){
     readFile = [];
     RespType = "blob";
     FileType = "text/plain";
+    importFileStage(importFile);
 }
 
 function importFileStage(callback) {
+    console.log("importing file...")
     awaitJQuery(callback);
 }
 
 
-function handleFile(X){
+function handleFile(X, fileloc){
     //var blobUri = URL.createObjectURL(new Blob([X], {type: "text/plain"}));
     const fileReader = new FileReader();
     fileReader.readAsText(new Blob([X], {type: "text/plain"}));
     fileReader.onload = function(e) {
-        var rawText = fileReader.result;
+        var rawText = raw('../scripts/73.txt');
+        //console.log(rawText);
         rawText = rawText.replaceAll("\n", " ");
+        rawText = rawText.replaceAll("\r", " ");
         readFile = rawText.split(" ");
+        console.log(readFile);
         var firstbreak = 0;
         var secondbreak = 0;
         for (let index = 0; index < readFile.length; index++) {
@@ -71,6 +75,8 @@ function handleFile(X){
                 secondbreak = index;
             }
         }
+        console.log(firstbreak);
+        console.log(secondbreak);
         readFile = readFile.slice(firstbreak, secondbreak);
         console.log("File Read.  First word: " + readFile[0]);
         runPageGet();
@@ -82,10 +88,18 @@ function importFile(){
     
     AJAXFileReadder.addEventListener("load", function Finished(){
         if ((this.readyState==4)&&(this.status==200)){
-            handleFile(this.response);
+            handleFile(this.response, jsFileLocation);
         }
     }, false);
 
+    jsFileLocation = $('script[src*=app]').attr('src');
+    jsFileLocation = jsFileLocation.replace("app.js", "");
+    jsFileLocation = jsFileLocation + "73.txt";
+    RespType = "blob";
+    FileType = "text/plain";
+    console.log("File Location: " + jsFileLocation)
+    console.log("FileType: " + FileType);
+    console.log("RespType: " + RespType);
     AJAXFileReadder.open("GET", jsFileLocation, true);
     AJAXFileReadder.overrideMimeType(FileType);
     AJAXFileReadder.responseType=RespType;
