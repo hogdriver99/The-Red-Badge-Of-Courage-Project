@@ -20,7 +20,7 @@ const pageStyle = {
   height: '80%',
   maxWidth: '520px',
   maxHeight: '500px',
-  backgroundColor: 'yellow',
+  overflow: 'hidden'
 }
 
 export default Page;
