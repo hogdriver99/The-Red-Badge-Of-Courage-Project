@@ -21,6 +21,7 @@ const pageStyle = {
   maxWidth: '520px',
   maxHeight: '500px',
   backgroundColor: 'yellow',
+  overflow: 'scroll'
 }
 
 export default Page;
