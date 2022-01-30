@@ -23,4 +23,4 @@ const pageStyle = {
   overflow: 'hidden'
 }
 
-export default Page;
+export default Page; 
