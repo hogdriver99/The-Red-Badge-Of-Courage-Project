@@ -143,10 +143,10 @@ function importFile(){
 var text1 = '';
 var text2 = '';
 function runPageGet(){
-    for (let index = 0; index < 50; index++){
+    for (let index = 0; index < 400; index++){
         text1 = text1 + " " + readFile[index];
     }
-    for (let index = 50; index < 100; index++){
+    for (let index = 400; index < 800; index++){
         text2 = text2 + " " + readFile[index];
     }
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
@@ -161,10 +161,10 @@ function nextPage(){
     document.cookie = "pagenum=" + newpg;
     text1 = '';
     text2 = '';
-    for (let index = (newpg - 1)*50; index < newpg*50; index++){
+    for (let index = (newpg - 1)*400; index < newpg*400; index++){
         text1 = text1 + " " + readFile[index];
     }
-    for (let index = newpg*50; index < (newpg+1)*50; index++){
+    for (let index = newpg*400; index < (newpg+1)*400; index++){
         text2 = text2 + " " + readFile[index];
     }
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
@@ -182,10 +182,10 @@ function backPage(){
     document.cookie = "pagenum=" + newpg;
     text1 = '';
     text2 = '';
-    for (let index = (newpg - 1)*50; index < newpg*50; index++){
+    for (let index = (newpg - 1)*400; index < newpg*400; index++){
         text1 = text1 + " " + readFile[index];
     }
-    for (let index = newpg*50; index < (newpg+1)*50; index++){
+    for (let index = newpg*400; index < (newpg+1)*400; index++){
         text2 = text2 + " " + readFile[index];
     }
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
