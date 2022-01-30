@@ -295,4 +295,4 @@ function backPage(){
     startidx = endidx;
     endidx = endidx + cacheDiff;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-}
+} 
