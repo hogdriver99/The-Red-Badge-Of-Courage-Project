@@ -2,9 +2,9 @@ import React from 'react';
 
 const Page = ({pageSide}) => {
   return (
-    <div className={contentName(pageSide)} style={pageStyle}>
-        <p className={pageName(pageSide)}></p>
-    </div>
+      <div className={contentName(pageSide)} style={pageStyle}>
+          <p className={pageName(pageSide)}></p>
+      </div>
   )
 };
 
@@ -17,10 +17,9 @@ function pageName(pageSide) {
 }
 
 const pageStyle = {
-  height: '80%',
   maxWidth: '520px',
   maxHeight: '500px',
-  backgroundColor: 'yellow',
+  overflow: 'scroll'
 }
 
 export default Page;
