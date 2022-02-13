@@ -2,7 +2,15 @@
   text-align: center;
 }
 
-/* 
+::-webkit-scrollbar{
+  width: 0px
+}
+
+::selection {
+  background: #ffff66;
+}
+
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
