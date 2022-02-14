@@ -19,7 +19,8 @@ function pageName(pageSide) {
 const pageStyle = {
   maxWidth: '520px',
   maxHeight: '500px',
-  overflow: 'scroll'
+  overflow: 'scroll',
+  whiteSpace: 'pre-wrap'
 }
 
 export default Page;
