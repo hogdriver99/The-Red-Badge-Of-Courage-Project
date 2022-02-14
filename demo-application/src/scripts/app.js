@@ -144,13 +144,13 @@ var text1 = '';
 var text2 = '';
 var startidx;
 var endidx;
-var stdDiff = 500;
+var stdDiff = 350;
 // var prevCachePnt = 0;
 // var cacheDiff;
 // var prevCache = []
 function runPageGet(){
     startidx = 0;
-    endidx = 500;
+    endidx = 350;
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = "Pages 1-2"
