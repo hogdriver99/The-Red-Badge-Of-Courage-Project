@@ -179,6 +179,7 @@ function runPageGet(){
     console.log("startidx: " + startidx);
     console.log("endidx: " + endidx);
 
+
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
     if (document.querySelector(DOMstrings.pageRight).scrollHeight > document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
@@ -204,6 +205,7 @@ function runPageGet(){
     prevCachePnt++;
     prevCache[prevCachePnt] = cacheDiff;
 }
+
 
 function pageSet(startidx, endidx, source) {
     var outtext = '';
@@ -280,6 +282,15 @@ $(document).ready(function() {
     });
 
 });
+
+//Takes away triple click
+document.querySelector('div').addEventListener('click', function (evt) {
+    if (evt.detail >= 3) {
+        var rem = window.getSelection();
+        rem.removeAllRanges();
+    }
+});
+
 
 function nextPage(){
     var currpg = document.cookie;
@@ -363,4 +374,6 @@ function backPage(){
     startidx = endidx;
     endidx = endidx + cacheDiff;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-} 
+}
+
+
