@@ -24,13 +24,13 @@ function awaitJQuery(callback) {
             // console.log("jquery loaded..");
             // console.log(typeof jQuery)
             callback()
-            // invoke any methods defined in your JS files to begin execution       
+            // invoke any methods defined in your JS files to begin execution
         } else {
             console.log("jquery not loaded..");
             window.setTimeout(waitForLoad, 500);
         }
     };
-    window.setTimeout(waitForLoad, 500); 
+    window.setTimeout(waitForLoad, 500);
 }
 
 function loadApp(){
@@ -85,7 +85,7 @@ function handleFile(X, fileloc){
 
 function importFile(){
     var AJAXFileReadder = new XMLHttpRequest();
-    
+
     AJAXFileReadder.addEventListener("load", function Finished(){
         if ((this.readyState==4)&&(this.status==200)){
             handleFile(this.response, jsFileLocation);
@@ -215,11 +215,79 @@ function pageSet(startidx, endidx, source) {
     return outtext;
 }
 
+//highlights words on one click
+$(document).ready(function() {
+
+    var point = $('p');
+    point.css({ cursor: 'pointer' });
+
+    point.click(function(e) {
+
+        //finds range of selected word
+        var selection = window.getSelection() || document.getSelection()
+        || document.selection.createRange();
+        var range = selection.getRangeAt(0);
+        var node = selection.anchorNode;
+
+        //keeps track if there is a - in a word before the selected letter
+        var counter = 0;
+        while(range.toString().indexOf(' ') != 0) {
+            if(/^[-]*$/.test(range.toString().charAt(0))) {
+                counter++;
+                if(counter == 2) {
+                    break;
+                }
+            }
+            range.setStart(node, (range.startOffset - 1));
+        }
+        range.setStart(node, range.startOffset + 1);
+
+        //keeps track if there is a - in a word after the selected letter
+        const countUp = 0;
+        while(range.toString().indexOf(' ') == -1 && range.toString().trim() != '' &&
+            range.endOffset + 1 < selection.baseNode.wholeText.length) {
+            if(/^[-]*$/.test(range.toString().charAt(range.toString().length - 1))) {
+                counter++;
+                if(counter == 2) {
+                    break;
+                }
+            }
+            range.setEnd(node, range.endOffset + 1);
+        }
+
+        //No highlighted space after word
+        range.setEnd(node, range.endOffset - 1);
+
+        //removes end puncuation from highlighted word
+        while (1) {
+            const endChar = range.toString().charAt(range.toString().length - 1);
+            if (!/^[a-zA-Z0-9']*$/.test(endChar)) {
+                range.setEnd(node, range.endOffset - 1);
+            } else {
+                break;
+            }
+        }
+
+        //removes quotations at beginning of highlighted word
+        const startChar = range.toString().charAt(0);
+        if(!/^[a-zA-Z0-9']*$/.test(startChar)) {
+            range.setStart(node, range.startOffset + 1);
+        }
+
+        //checks if word has -- before or after clicked letter
+
+        var text = $.trim(selection.toString());
+        selection.collapse();
+        e.stopPropagation();
+    });
+
+});
+
 function nextPage(){
     var currpg = document.cookie;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
-    var newpg = currpg + 1
+    var newpg = currpg + 1;
     document.cookie = "pagenum=" + newpg;
     text1 = '';
     text2 = '';
