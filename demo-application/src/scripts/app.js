@@ -229,12 +229,11 @@ $(document).ready(function() {
         var range = selection.getRangeAt(0);
         var node = selection.anchorNode;
 
-        //keeps track if there is a - in a word before the selected letter
-        var counter = 0;
+        //sets start offset of word and catches in there is a -- before the selected character
         while(range.toString().indexOf(' ') != 0) {
-            if(/^[-]*$/.test(range.toString().charAt(0))) {
-                counter++;
-                if(counter == 2) {
+            if(range.toString().charAt(1) != 0) {
+                if(/^[-]*$/.test(range.toString().charAt(0)) &&
+                    /^[-]*$/.test(range.toString().charAt(1))) {
                     break;
                 }
             }
@@ -242,13 +241,13 @@ $(document).ready(function() {
         }
         range.setStart(node, range.startOffset + 1);
 
-        //keeps track if there is a - in a word after the selected letter
+        //stats end offset and catches if there is a -- after the selected letter
         const countUp = 0;
         while(range.toString().indexOf(' ') == -1 && range.toString().trim() != '' &&
             range.endOffset + 1 < selection.baseNode.wholeText.length) {
-            if(/^[-]*$/.test(range.toString().charAt(range.toString().length - 1))) {
-                counter++;
-                if(counter == 2) {
+            if(range.toString().charAt(range.toString().length - 2 != 0)) {
+                if(/^[-]*$/.test(range.toString().charAt(range.toString().length - 1)) &&
+                    /^[-]*$/.test(range.toString().charAt(range.toString().length - 2))) {
                     break;
                 }
             }
@@ -273,8 +272,6 @@ $(document).ready(function() {
         if(!/^[a-zA-Z0-9']*$/.test(startChar)) {
             range.setStart(node, range.startOffset + 1);
         }
-
-        //checks if word has -- before or after clicked letter
 
         var text = $.trim(selection.toString());
         selection.collapse();
