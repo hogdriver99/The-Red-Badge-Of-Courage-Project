@@ -157,9 +157,11 @@ function runPageGet(){
     // console.log("startidx: " + startidx);
     // console.log("endidx: " + endidx);
 
+
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
 }
+
 
 function pageSet(startidx, endidx, source) {
     var outtext = '';
@@ -306,6 +308,14 @@ function pageReturn() {
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
 }
+//Takes away triple click
+document.querySelector('div').addEventListener('click', function (evt) {
+    if (evt.detail >= 3) {
+        var rem = window.getSelection();
+        rem.removeAllRanges();
+    }
+});
+
 
 function nextPage(){
     var currpg = document.cookie;
