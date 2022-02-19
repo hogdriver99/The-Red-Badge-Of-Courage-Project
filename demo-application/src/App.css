@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-::-webkit-scrollbar{
-  width: 0px
-}
 
 ::selection {
   background: #ffff66;

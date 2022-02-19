@@ -82,3 +82,17 @@ body {
   width: 42%;
   height: 80%;
 }
+
+.button {
+  color: black;
+  background-color: darkcyan;
+  border-width: 0px;
+  border-radius: 10%;
+  margin: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+}

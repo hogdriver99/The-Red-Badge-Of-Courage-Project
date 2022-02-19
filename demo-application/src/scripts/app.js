@@ -1,5 +1,10 @@
 import $ from 'jquery';
 import raw from 'raw.macro';
+import AppDefPage from '../AppDefPage';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import App from '../App';
+import AppQuizPage from '../AppQuizPage';
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -132,14 +137,6 @@ function importFile(){
 //     if (parts.length === 2) return int(parts.pop().split(';').shift())
 // })
 
-/**var someText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-    + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-    + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-    + "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in "
-    + "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
-    + "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
-    + "culpa qui officia deserunt mollit anim id est laborum.";**/
-
 var text1 = '';
 var text2 = '';
 var startidx;
@@ -154,28 +151,7 @@ function runPageGet(){
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = "Pages 1-2"
-    // if (document.querySelector(DOMstrings.pageLeft).scrollHeight > document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //     console.log("first block too big");
-    //     while (document.querySelector(DOMstrings.pageLeft).scrollHeight > document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //         endidx--;
-    //         text1 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    //     }
-    // } else {
-    //     console.log("filling out block");
-    //     while (document.querySelector(DOMstrings.pageLeft).scrollHeight < document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //         endidx++;
-    //         text1 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    //     }
-    //     endidx--;
-    //     text1 = pageSet(startidx, endidx, readFile);
-    //     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    // }
-    // console.log("scroll height: " + document.querySelector(DOMstrings.pageLeft).scrollHeight);
-    // console.log("client height: " + document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight);
-    // cacheDiff = endidx - startidx;
-    // prevCache[prevCachePnt] = cacheDiff;
+    
     startidx = endidx;
     endidx = endidx + stdDiff;
     // console.log("startidx: " + startidx);
@@ -183,28 +159,6 @@ function runPageGet(){
 
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    // if (document.querySelector(DOMstrings.pageRight).scrollHeight > document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //     console.log("second block too big");
-    //     while (document.querySelector(DOMstrings.pageRight).scrollHeight > document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //         endidx--;
-    //         text2 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageRight).textContent = text2;
-    //         console.log("size decremented")          
-    //     }
-    // } else {
-    //     console.log("filling out second block");
-    //     while (document.querySelector(DOMstrings.pageRight).scrollHeight < document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //         endidx++;
-    //         text2 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageRight).textContent = text2;
-    //     }
-    //     endidx--;
-    //     text2 = pageSet(startidx, endidx, readFile);
-    //     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    // }
-    // cacheDiff = endidx - startidx;
-    // prevCachePnt++;
-    // prevCache[prevCachePnt] = cacheDiff;
 }
 
 function pageSet(startidx, endidx, source) {
@@ -283,6 +237,76 @@ $(document).ready(function() {
 
 });
 
+document.querySelector('div').addEventListener('click', function (evt) {
+    if (evt.detail == 2) {
+        console.log("Trying to pull def page");
+        pullDefPage();
+    }
+})
+
+function pullDefPage() {
+    window.defPage = true;
+    console.log(AppDefPage);
+    ReactDOM.render(
+        <React.StrictMode>
+          {(!window.defPage) ? <App /> : <AppDefPage />}
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+function pullQuizPage() {
+    window.defPage = false;
+    console.log("Trying to pull Quiz Page")
+    ReactDOM.render(
+        <React.StrictMode>
+            <AppQuizPage />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+export function btnHandler(btnVal) {
+    console.log(btnVal);
+    if (btnVal == "Quiz") {
+        pullQuizPage();
+    } else if (btnVal == "Return to book") {
+        backToBook();
+    } else if (btnVal == 'wordA' || btnVal == 'wordB' || btnVal =='wordC' || btnVal == 'wordD') {
+        backToBook();
+    }
+}
+
+async function backToBook() {
+    window.defPage = false;
+    await ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+    pageReturn();
+}
+
+function pageReturn() {
+    var currpg = document.cookie;
+    currpg = currpg.split("=");
+    currpg = parseInt(currpg[1], 10);
+    startidx = (currpg - 1) * stdDiff;
+    endidx = startidx + stdDiff;
+    text1 = pageSet(startidx, endidx, readFile);
+    document.querySelector(DOMstrings.pageLeft).textContent = text1;
+    document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + currpg + "-" + (currpg + 1);
+
+    startidx = endidx;
+    endidx = endidx + stdDiff;
+    text2 = pageSet(startidx, endidx, readFile);
+    document.querySelector(DOMstrings.pageRight).textContent = text2;
+    
+    document.getElementById("nextpage").addEventListener("click", nextPage);
+    document.getElementById("backpage").addEventListener("click", backPage);
+}
+
 function nextPage(){
     var currpg = document.cookie;
     currpg = currpg.split("=");
@@ -296,50 +320,11 @@ function nextPage(){
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + newpg + "-" + (newpg + 1);
-    // if (document.querySelector(DOMstrings.pageLeft).scrollHeight > document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //     console.log("first block too big");
-    //     while (document.querySelector(DOMstrings.pageLeft).scrollHeight > document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //         endidx--;
-    //         text1 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    //     }
-    // } else {
-    //     console.log("filling out block");
-    //     while (document.querySelector(DOMstrings.pageLeft).scrollHeight < document.querySelector(DOMstrings.pageLeft).parentElement.clientHeight) {
-    //         endidx++;
-    //         text1 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    //     }
-    //     endidx--;
-    //     text1 = pageSet(startidx, endidx, readFile);
-    //     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    // }
+    
     startidx = endidx;
     endidx = endidx + stdDiff;
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    // if (document.querySelector(DOMstrings.pageRight).scrollHeight > document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //     console.log("second block too big");
-    //     while (document.querySelector(DOMstrings.pageRight).scrollHeight > document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //         endidx--;
-    //         text2 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageRight).textContent = text2;
-    //         console.log("size decremented")          
-    //     }
-    // } else {
-    //     console.log("filling out second block");
-    //     while (document.querySelector(DOMstrings.pageRight).scrollHeight < document.querySelector(DOMstrings.pageRight).parentElement.clientHeight) {
-    //         endidx++;
-    //         text2 = pageSet(startidx, endidx, readFile);
-    //         document.querySelector(DOMstrings.pageRight).textContent = text2;
-    //     }
-    //     endidx--;
-    //     text2 = pageSet(startidx, endidx, readFile);
-    //     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    // }
-    // cacheDiff = endidx - startidx;
-    // prevCachePnt++;
-    // prevCache[prevCachePnt] = cacheDiff;
 }
 
 function backPage(){
@@ -357,13 +342,9 @@ function backPage(){
     document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + newpg + "-" + (newpg + 1)
     endidx = startidx - stdDiff;
     startidx = endidx - stdDiff;
-    // console.log(prevCache);
-    // console.log("endidx: " + endidx);
-    // console.log("startidx: " + startidx);
-    // console.log("prevCachePnt" + (prevCachePnt));
-    // prevCachePnt--;
+
     text1 = pageSet(startidx, endidx, readFile);
-    // cacheDiff = endidx - startidx;
+
     startidx = endidx;
     endidx = endidx + stdDiff;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
