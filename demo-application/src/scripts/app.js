@@ -16,6 +16,7 @@ var jsFileLocation;
 var readFile;
 var RespType;
 var FileType;
+var chapterKeys = [];
 
 export function AppStartUp() {
     //document.querySelector(DOMstrings.pageNumber).textContent = 'Page 1-2';
@@ -43,7 +44,27 @@ function loadApp(){
 
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
-    //document.addEventListener("DOMContentLoaded", runPageGet);
+    document.getElementById("nextChapter").addEventListener("click", nextChapter);
+    document.getElementById("backChapter").addEventListener("click", backChapter);
+    document.addEventListener("DOMContentLoaded", runPageGet);
+    document.getElementById('currpage').addEventListener('blur', function() {
+        var currpg = document.getElementById('currpage').textContent
+        console.log(currpg);
+        try {
+            currpg = parseInt(currpg, 10);
+            document.cookie = 'pagenum=' + currpg;
+            pageReturn();
+        } catch (error) {
+            console.log(error);
+            currpg = document.cookie;
+            currpg = currpg.split("=");
+            currpg = parseInt(currpg[1], 10);
+            console.log(currpg);
+            var newpg = currpg + 1;
+            document.querySelector(DOMstrings.pageNumber).textContent = currpg + "-" + newpg;
+            //TODO: Raise dialog box explaining issue
+        }
+    }, false);
 
     document.cookie = "pagenum=1";
 
@@ -73,6 +94,9 @@ function handleFile(X, fileloc){
         var firstbreak = 0;
         var secondbreak = 0;
         for (let index = 0; index < readFile.length; index++) {
+            if (readFile[index] == "Chapter") {
+                chapterKeys.push(index);
+            }
             if (readFile[index] + " " + readFile[index+1] == "Chapter 1"){
                 firstbreak = index;
             }
@@ -83,6 +107,9 @@ function handleFile(X, fileloc){
         console.log(firstbreak);
         console.log(secondbreak);
         readFile = readFile.slice(firstbreak, secondbreak);
+        for (let index = 0; index < chapterKeys.length; index++) {
+            chapterKeys[index] -= firstbreak;
+        }
         console.log("File Read.  First word: " + readFile[0]);
         runPageGet();
     };
@@ -113,30 +140,6 @@ function importFile(){
     AJAXFileReadder.send();
 }
 
-// function runPyPageGet(){
-//     return runPyPageGetter(()=>{
-//         const value = `; ${document.cookie}`;
-//         const parts = value.split(`; ${pagenum}=`);
-//         if (parts.length === 2) return int(parts.pop().split(';').shift())
-//     })
-// }
-
-// function runPyPageGetter(input){
-//     var textGetter = $.ajax({
-//         type: "POST",
-//         url: "/page",
-//         async: false,
-//         data: {mydata: input}
-//     });
-//     return textGetter.responseText;
-// }
-
-// var someText = runPyPageGetter(()=>{
-//     const value = `; ${document.cookie}`;
-//     const parts = value.split(`; ${'pagenum'}=`);
-//     if (parts.length === 2) return int(parts.pop().split(';').shift())
-// })
-
 var text1 = '';
 var text2 = '';
 var startidx;
@@ -150,7 +153,7 @@ function runPageGet(){
     endidx = 350;
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    document.querySelector(DOMstrings.pageNumber).textContent = "Pages 1-2"
+    document.querySelector(DOMstrings.pageNumber).textContent = "1-2"
     
     startidx = endidx;
     endidx = endidx + stdDiff;
@@ -298,7 +301,7 @@ function pageReturn() {
     endidx = startidx + stdDiff;
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + currpg + "-" + (currpg + 1);
+    document.querySelector(DOMstrings.pageNumber).textContent = currpg + "-" + (currpg + 1);
 
     startidx = endidx;
     endidx = endidx + stdDiff;
@@ -307,6 +310,24 @@ function pageReturn() {
     
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
+    document.getElementById("nextChapter").addEventListener("click", nextChapter);
+    document.getElementById("backChapter").addEventListener("click", backChapter);
+    document.getElementById('currpage').addEventListener('blur', function() {
+        var currpg = document.getElementById('currpage').textContent
+        try {
+            currpg = parseInt(currpg, 10);
+            document.cookie = 'pagenum=' + currpg;
+            pageReturn();
+        } catch (error) {
+            currpg = document.cookie;
+            currpg = currpg.split("=");
+            currpg = parseInt(currpg[1], 10);
+            console.log(currpg);
+            var newpg = currpg + 1;
+            document.querySelector(DOMstrings.pageNumber).textContent = currpg + "-" + newpg;
+            //TODO: Raise dialog box explaining issue
+        }
+    }, false);
 }
 //Takes away triple click
 document.querySelector('div').addEventListener('click', function (evt) {
@@ -329,7 +350,7 @@ function nextPage(){
     //endidx = endidx + cacheDiff;
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
-    document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + newpg + "-" + (newpg + 1);
+    document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
     
     startidx = endidx;
     endidx = endidx + stdDiff;
@@ -349,7 +370,7 @@ function backPage(){
     text1 = '';
     text2 = '';
     document.querySelector(DOMstrings.pageRight).textContent = document.querySelector(DOMstrings.pageLeft).textContent;
-    document.querySelector(DOMstrings.pageNumber).textContent = "Pages " + newpg + "-" + (newpg + 1)
+    document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1)
     endidx = startidx - stdDiff;
     startidx = endidx - stdDiff;
 
@@ -358,4 +379,47 @@ function backPage(){
     startidx = endidx;
     endidx = endidx + stdDiff;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
+}
+
+function nextChapter() {
+    var currpg = document.cookie;
+    currpg = currpg.split("=");
+    currpg = parseInt(currpg[1], 10);
+    startidx = (currpg - 1) * stdDiff;
+    endidx = startidx + stdDiff;
+    var target;
+    for (let index = 0; index < chapterKeys.length; index++) {
+        if (chapterKeys[index] >= endidx) {
+            target = index;
+            break;
+        }
+    }
+    if (target == null) {
+        //TODO: raise error
+        return;
+    }
+    var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
+    document.cookie = "pagenum=" + newpg;
+    pageReturn();
+}
+
+function backChapter() {
+    var currpg = document.cookie;
+    currpg = currpg.split("=");
+    currpg = parseInt(currpg[1], 10);
+    startidx = (currpg - 1) * stdDiff;
+    var target;
+    for (let index = 0; index < chapterKeys.length; index++) {
+        if (chapterKeys[index] >= startidx) {
+            target = index - 1;
+            break;
+        }
+    }
+    if (target == null) {
+        //TODO: raise error
+        return;
+    }
+    var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
+    document.cookie = "pagenum=" + newpg;
+    pageReturn();
 }

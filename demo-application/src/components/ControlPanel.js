@@ -12,7 +12,7 @@ const ControlPanel = () => {
           <Icon image={dBtnLeft} name='backChapter'/>
           <Icon image={sBtnLeft} name='backpage'/>
         </div>
-        <h3 className='page-number'>Page</h3>
+        <div className='pages'><h3 className='inline-block-child'>Pages </h3>{'\u00A0'}<h3 contentEditable='true' className='page-number' id='currpage'>1-2</h3></div>
         <div>
           <Icon image={sBtnRight} name='nextpage'/>
           <Icon image={dBtnRight} name='nextChapter'/>

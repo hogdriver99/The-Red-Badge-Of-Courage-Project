@@ -96,3 +96,15 @@ body {
   padding: 10px;
   cursor: pointer;
 }
+
+.inline-block-child {
+  display: inline-block;
+}
+
+.page-number {
+  display: inline-block;
+}
+
+.pages {
+  white-space: nowrap;
+}
