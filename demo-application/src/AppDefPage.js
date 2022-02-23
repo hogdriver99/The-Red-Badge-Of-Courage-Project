@@ -1,17 +1,19 @@
 import './App.css';
-import Book from './components/Book';
+import DefPage from './components/DefPage';
 import ControlPanel from './components/ControlPanel';
 import Menu from './components/Menu';
+import './index.css';
 
-function App() {
-  return (
+function AppDefPage() {
+  console.log(DefPage);
+    return (
     <div className="app" id="app">
       <Menu />
-      <Book />
+      <DefPage />
       <ControlPanel />
     </div>
   );
 }
 
 
-export default App;
+export default AppDefPage;

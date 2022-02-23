@@ -2,7 +2,7 @@
 const Button = ({text}) => {
     return (
         <>
-            <button style={buttonStyle}>{text}</button>
+            <button style={buttonStyle} onclick="btnHandler(this.text)">{text}</button>
         </>
     )
 }
