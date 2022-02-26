@@ -154,7 +154,6 @@ function runPageGet(){
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = "1-2"
-
     startidx = endidx;
     endidx = endidx + stdDiff;
     // console.log("startidx: " + startidx);
@@ -303,7 +302,6 @@ function pageReturn() {
     endidx = endidx + stdDiff;
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
-
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
     document.getElementById("nextChapter").addEventListener("click", nextChapter);
@@ -325,7 +323,6 @@ function pageReturn() {
         }
     }, false);
 }
-
 //Takes away triple click
 document.querySelector('div').addEventListener('click', function (evt) {
     if (evt.detail >= 3) {

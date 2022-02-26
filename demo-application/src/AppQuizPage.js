@@ -1,17 +1,17 @@
 import './App.css';
-import Book from './components/Book';
+import QuizPage from './components/QuizPage';
 import ControlPanel from './components/ControlPanel';
 import Menu from './components/Menu';
 
-function App() {
-  return (
+function AppQuizPage() {
+    return (
     <div className="app" id="app">
       <Menu />
-      <Book />
+      <QuizPage />
       <ControlPanel />
     </div>
   );
 }
 
 
-export default App;
+export default AppQuizPage;
