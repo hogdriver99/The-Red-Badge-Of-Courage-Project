@@ -168,6 +168,9 @@ function runPageGet(){
 function pageSet(startidx, endidx, source) {
     var outtext = '';
     for (let index = startidx; index < endidx; index++){
+        if (index >= source.length) {
+            return outtext;
+        }
         outtext = outtext + " " + source[index];
     }
     return outtext;
@@ -336,13 +339,16 @@ function nextPage(){
     var currpg = document.cookie;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
-    var newpg = currpg + 1;
-    document.cookie = "pagenum=" + newpg;
     text1 = '';
     text2 = '';
     //startidx = endidx;
     //endidx = endidx + cacheDiff;
     text1 = pageSet(startidx, endidx, readFile);
+    if (text1.length < stdDiff) {
+        return;
+    }
+    var newpg = currpg + 1;
+    document.cookie = "pagenum=" + newpg;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
 
@@ -409,7 +415,7 @@ function backChapter() {
             break;
         }
     }
-    if (target == null) {
+    if (target == null || target < 0) {
         //TODO: raise error
         return;
     }
