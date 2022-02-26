@@ -154,7 +154,6 @@ function runPageGet(){
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = "1-2"
-    
     startidx = endidx;
     endidx = endidx + stdDiff;
     // console.log("startidx: " + startidx);
@@ -175,7 +174,7 @@ function pageSet(startidx, endidx, source) {
 }
 
 //highlights words on one click
-$(document).ready(function() {
+$(window).on("load", function() {
 
     var point = $('p');
     point.css({ cursor: 'pointer' });
@@ -200,7 +199,7 @@ $(document).ready(function() {
         }
         range.setStart(node, range.startOffset + 1);
 
-        //stats end offset and catches if there is a -- after the selected letter
+        //sets end offset and catches if there is a -- after the selected letter
         const countUp = 0;
         while(range.toString().indexOf(' ') == -1 && range.toString().trim() != '' &&
             range.endOffset + 1 < selection.baseNode.wholeText.length) {
@@ -234,17 +233,14 @@ $(document).ready(function() {
 
         var text = $.trim(selection.toString());
         selection.collapse();
-        e.stopPropagation();
+    });
+
+    point.dblclick(function(f) {
+        console.log("Trying to pull def page");
+        pullDefPage();
     });
 
 });
-
-document.querySelector('div').addEventListener('click', function (evt) {
-    if (evt.detail == 2) {
-        console.log("Trying to pull def page");
-        pullDefPage();
-    }
-})
 
 function pullDefPage() {
     window.defPage = true;
@@ -274,8 +270,10 @@ export function btnHandler(btnVal) {
         pullQuizPage();
     } else if (btnVal == "Return to book") {
         backToBook();
+        window.location.reload();
     } else if (btnVal == 'wordA' || btnVal == 'wordB' || btnVal =='wordC' || btnVal == 'wordD') {
         backToBook();
+        window.location.reload();
     }
 }
 
@@ -304,7 +302,6 @@ function pageReturn() {
     endidx = endidx + stdDiff;
     text2 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
     document.getElementById("nextChapter").addEventListener("click", nextChapter);
@@ -348,7 +345,7 @@ function nextPage(){
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
-    
+
     startidx = endidx;
     endidx = endidx + stdDiff;
     text2 = pageSet(startidx, endidx, readFile);
