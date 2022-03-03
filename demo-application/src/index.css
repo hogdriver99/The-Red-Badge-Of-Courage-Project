@@ -29,6 +29,37 @@ body {
   align-self: center;
   position: absolute;
   top: 2%;
+  visibility: hidden;
+}
+
+/* Mobile version of the menu style */
+.menuMobile {
+  /* parent flex box set up as a row */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  align-self: center;
+  position: absolute;
+  top: 2%;
+  visibility: visible;
+  /* margin-bottom: 10px; */
+}
+
+.menuMobileRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  align-self: center;
+}
+
+#h1small {
+  /* font-size: small; */
 }
 
 .controlPanel {
@@ -46,9 +77,9 @@ body {
 
 .bookContainer {
   width: 90%;
-  height: 80%;
+  height: 580px;
   position: absolute;
-  top: 50%;
+  top: 380px;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
@@ -107,4 +138,17 @@ body {
 
 .pages {
   white-space: nowrap;
+}
+
+/* Adding mobile version - Mobile first so that it loads faster on mobile devices */
+
+@media (min-width: 750px) {
+
+  .menu {
+    visibility: visible;
+  }
+
+  .menuMobile {
+    visibility: hidden;
+  }
 }
