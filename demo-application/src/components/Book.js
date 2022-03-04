@@ -8,6 +8,10 @@ const Book = () => {
             <Page pageSide='right'/>
             <Page pageSide='left'/>
         </div>
+        {/* For mobile version */}
+        <div className='bookOnePage'>
+            <Page pageSide='one'/>
+        </div>
     </div>
   )
 };

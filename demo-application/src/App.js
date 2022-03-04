@@ -1,5 +1,6 @@
 import './App.css';
 import Book from './components/Book';
+import BookWithControl from './components/BookWithControl';
 import ControlPanel from './components/ControlPanel';
 import Menu from './components/Menu';
 import MenuMobile from './components/MenuMobile';
@@ -11,6 +12,7 @@ function App() {
       <MenuMobile />
       <Book />
       <ControlPanel />
+      {/* <BookWithControl /> */}
     </div>
   );
 }
