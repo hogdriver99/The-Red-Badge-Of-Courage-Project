@@ -9,9 +9,9 @@ const Book = () => {
             <Page pageSide='left'/>
         </div>
         {/* For mobile version */}
-        <div className='bookOnePage'>
+        {/* <div className='bookOnePage'>
             <Page pageSide='one'/>
-        </div>
+        </div> */}
     </div>
   )
 };
