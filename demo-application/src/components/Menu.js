@@ -7,18 +7,16 @@ import { useEffect, useState } from 'react'
 
 const Menu = () => {
     // Showing Mobile Version
+    var initMobile = (window.innerWidth > 800? false: true)
+    const [showMobileMenu, setShowMobileMenu] = useState(initMobile)
 
-    const [showMobileMenu, setShowMobileMenu] = useState(false)
-
+    // Detecting resize
     useEffect(() => {
         const handleResize = () => {
-            console.log("RESIZE")
             if (window.innerWidth > 800) {
                 setShowMobileMenu(false)
-                console.log("Web")
             } else {
                 setShowMobileMenu(true)
-                console.log("Mobile")
             }
         };
         window.addEventListener('resize', handleResize);
@@ -29,10 +27,9 @@ const Menu = () => {
     }, []);
 
     // Showing the navigation side bar
-    const [showNavBar, setShowNavBar] = useState(true)
+    const [showNavBar, setShowNavBar] = useState(false)
     const navOnClick = () => {
         setShowNavBar(!showNavBar)
-        console.log(window.innerWidth)
     }
 
     return (

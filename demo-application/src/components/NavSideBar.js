@@ -10,6 +10,7 @@ const NavSideBar = ({mobile}) => {
                 {mobile && <Icon image={home} name='home'/>}
                 {mobile && <Button text='Log In'/>}
                 <h1>Item</h1>
+                {/* Option to hide lower buttons? */}
             </div>
         </div>
         )
