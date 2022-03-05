@@ -48,7 +48,7 @@ body {
   align-self: center;
   position: absolute;
   top: 10px;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 /* Mobile version of the menu style */
@@ -63,7 +63,7 @@ body {
   align-self: center;
   position: absolute;
   top: 10px;
-  visibility: visible;
+  visibility: hidden;
   /* margin-bottom: 10px; */
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 .icon-nav {
-  order: 1;
+  /* order: 1; */
   position: absolute;
   left: 7%;
   width: 10px;
@@ -92,7 +92,7 @@ body {
 }
 
 .icon-home {
-  order: 2;
+  /* order: 2; */
 }
 
 .controlPanel {
@@ -232,13 +232,13 @@ body {
 
 @media (min-width: 750px) {
 
-  .menu {
+  /* .menu {
     visibility: visible;
   }
 
   .menuMobile {
     visibility: hidden;
-  }
+  } */
 
   .book {
     visibility: visible;
