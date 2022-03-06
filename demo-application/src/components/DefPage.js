@@ -17,7 +17,7 @@ const DefPage = () => {
 
             <div className='definition'>
               <center>
-                <h3>
+                <h3 className='defText'>
                   XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ
                 </h3>
               </center> 

@@ -151,12 +151,17 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 70%;
-  width: 70%;
+  height: 100%;
+  width: 100%;
   background-color: white;
   /* box-shadow: 0 0 10px #949292;
   padding: 20px; */
 }
+
+/* TO FIX */
+/* .defText {
+  overflow: hidden;
+} */
 
 .definition {
   position: absolute;
@@ -227,5 +232,10 @@ body {
   .bookContainer {
     top: 60px;
     height: 85%;
+  }
+
+  .defPage {
+    height: 70%;
+    width: 70%;
   }
 }
