@@ -7,10 +7,8 @@ function App() {
   return (
     <div className="app" id="app">
       <Menu />
-      {/* <MenuMobile /> */}
       <Book />
       <ControlPanel />
-      {/* <BookWithControl /> */}
     </div>
   );
 }

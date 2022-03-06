@@ -145,6 +145,71 @@ body {
   white-space: nowrap;
 }
 
+/* DEFENITION PAGE */
+.defPage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 70%;
+  background-color: white;
+  /* box-shadow: 0 0 10px #949292;
+  padding: 20px; */
+}
+
+.definition {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.definitionWord {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 10%;
+}
+
+.quizButton {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+
+.returnToBook {
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+}
+
+/* QUIZ PAGE */
+
+.quizButton1 {
+  position: absolute;
+  left: 10%;
+  bottom: 40%;
+  /* height: 20%;
+  width: 40%;
+  background-color: darkcyan; */
+}
+.quizButton2 {
+  position: absolute;
+  right: 10%;
+  bottom: 40%;
+}
+.quizButton3 {
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+}
+.quizButton4 {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+
 /* Adding mobile version - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {
   .content-left {
