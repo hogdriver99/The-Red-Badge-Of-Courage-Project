@@ -52,8 +52,17 @@ function loadApp(){
         console.log(currpg);
         try {
             currpg = parseInt(currpg, 10);
+            var cookiePg = document.cookie;
+            console.log(cookiePg);
+            cookiePg = cookiePg.split("=");
+            cookiePg = parseInt(cookiePg[1], 10);
+            console.log(cookiePg);
+            if (currpg <= 0) {
+                document.querySelector(DOMstrings.pageNumber).textContent = cookiePg + "-" + (cookiePg + 1);
+                return;
+            }
             document.cookie = 'pagenum=' + currpg;
-            pageReturn();
+            pageReturn(cookiePg);
         } catch (error) {
             console.log(error);
             currpg = document.cookie;
@@ -296,14 +305,25 @@ async function backToBook() {
     pageReturn();
 }
 
-function pageReturn() {
+function pageReturn(prevPg = null) {
     var currpg = document.cookie;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
     startidx = (currpg - 1) * stdDiff;
+    if (startidx > readFile.length) {
+        if (prevPg) {
+            currpg = prevPg;
+            document.querySelector(DOMstrings.pageNumber).textContent = currpg + "-" + (currpg + 1);
+            document.cookie = "pagenum=" + currpg;
+        }
+        return;
+    }
     endidx = startidx + stdDiff;
     text1 = pageSet(startidx, endidx, readFile);
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
+    if (text1.length < stdDiff) {
+        return;
+    }
     document.querySelector(DOMstrings.pageNumber).textContent = currpg + "-" + (currpg + 1);
 
     startidx = endidx;
@@ -350,12 +370,13 @@ function nextPage(){
     //startidx = endidx;
     //endidx = endidx + cacheDiff;
     text1 = pageSet(startidx, endidx, readFile);
+    document.querySelector(DOMstrings.pageLeft).textContent = text1;
     if (text1.length < stdDiff) {
+        document.querySelector(DOMstrings.pageNumber).textContent = currpg + 1;
         return;
     }
     var newpg = currpg + 1;
     document.cookie = "pagenum=" + newpg;
-    document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
     
     startidx = endidx;
