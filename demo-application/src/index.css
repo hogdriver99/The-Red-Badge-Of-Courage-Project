@@ -197,11 +197,10 @@ body {
   bottom: 40%;
   height: 25%;
   width: 40%;
-  /*background-color: darkcyan; */
 }
 .quizButton2 {
   position: absolute;
-  right: 7%;
+  right: 10%;
   bottom: 40%;
   height: 25%;
   width: 40%;
@@ -215,7 +214,7 @@ body {
 }
 .quizButton4 {
   position: absolute;
-  right: 7%;
+  right: 10%;
   bottom: 10%;
   height: 25%;
   width: 40%;
@@ -227,7 +226,7 @@ body {
   border-radius: 0%;
 }
 
-/* Adding mobile version - Mobile first so that it loads faster on mobile devices */
+/* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {
   .content-left {
     position: absolute;
