@@ -13,11 +13,30 @@ body {
   /* parent flex box set up as column*/
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 5px;
 
 }
 
+/* NAVIGATION SIDE BAR */
+.navSideBar {
+  background-color: #A6F0C6;
+  position: absolute;
+  left: 0%;
+  top: 80px;
+  width: 300px;
+  height: 82%;
+  z-index: 2;
+  padding: 20px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* MENU */
 .menu {
   /* parent flex box set up as a row */
   display: flex;
@@ -25,12 +44,21 @@ body {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 87%;
+  /* height: 100px; */
   align-self: center;
   position: absolute;
-  top: 2%;
+  top: 10px;
 }
 
+/* Small title */
+#h1small {
+  position: absolute;
+  left: 30%;
+  font-size: 24px;
+}
+
+/* CONTROL PANEL */
 .controlPanel {
   /* parent flex box set up as a row */
   display: flex;
@@ -41,16 +69,19 @@ body {
   width: 90%;
   align-self: center;
   position: absolute;
-  top: 90%;
+  bottom: 0px;
+  background-color: #A6F0C6;
+  z-index: 1;
 }
 
+/* BOOK */
 .bookContainer {
   width: 90%;
-  height: 80%;
+  height: 85%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-self: center;
+  top: 60px;
+  /* transform: translate(-50%, -50%); */
   overflow: hidden;
   padding: 20px;
 }
@@ -61,10 +92,22 @@ body {
   /* align-self: center; */
   /* height: 600px; */
   /* width: 800px; */
+  position: relative;
+  top: 0px;
   width:100%;
   height:100%;
   background-color: white;
   box-shadow: 0 0 10px #949292;
+  /* visibility: hidden; */
+}
+
+/* Mobile First - one page initially*/
+.content-left {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  width: 84%;
+  height: 80%;
 }
 
 .content-right {
@@ -73,14 +116,7 @@ body {
   right: 7%;
   width: 42%;
   height: 80%;
-}
-
-.content-left {
-  position: absolute;
-  top: 10%;
-  left: 7%;
-  width: 42%;
-  height: 80%;
+  visibility: hidden;
 }
 
 .button {
@@ -107,4 +143,110 @@ body {
 
 .pages {
   white-space: nowrap;
+}
+
+/* DEFENITION PAGE */
+.defPage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  /* box-shadow: 0 0 10px #949292;
+  padding: 20px; */
+}
+
+/* TO FIX */
+/* .defText {
+  overflow: hidden;
+} */
+
+.definition {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.definitionWord {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 10%;
+}
+
+.quizButton {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+
+.returnToBook {
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+}
+
+/* QUIZ PAGE */
+
+.quizButton1 {
+  position: absolute;
+  left: 7%;
+  bottom: 40%;
+  height: 25%;
+  width: 40%;
+}
+.quizButton2 {
+  position: absolute;
+  right: 10%;
+  bottom: 40%;
+  height: 25%;
+  width: 40%;
+}
+.quizButton3 {
+  position: absolute;
+  left: 7%;
+  bottom: 10%;
+  height: 25%;
+  width: 40%;
+}
+.quizButton4 {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  height: 25%;
+  width: 40%;
+}
+
+.button {
+  width: 100%;
+  height: 100%;
+  border-radius: 0%;
+}
+
+/* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
+@media (min-width: 800px) {
+  .content-left {
+    position: absolute;
+    top: 10%;
+    left: 7%;
+    width: 42%;
+    height: 80%;
+  }
+
+  .content-right {
+    visibility: visible;
+  }
+
+  .bookContainer {
+    top: 60px;
+    height: 85%;
+  }
+
+  .defPage {
+    height: 70%;
+    width: 70%;
+  }
 }

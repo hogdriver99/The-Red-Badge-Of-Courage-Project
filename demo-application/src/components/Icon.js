@@ -1,8 +1,8 @@
 
-const Icon = ({image, name, id}) => {
+const Icon = ({image, name, onClick}) => {
     return (
         <>
-            <input className={getIconName(name)} id={name} type="image" src={image} style={iconStyle}/>
+            <input className={getIconName(name)} onClick={onClick} id={name} type="image" src={image} style={iconStyle}/>
         </>
     )
 }
