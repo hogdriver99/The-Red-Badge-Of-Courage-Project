@@ -17,6 +17,8 @@ var readFile;
 var RespType;
 var FileType;
 var chapterKeys = [];
+var pageTrack;
+var pageTrack_deserialized;
 
 export function AppStartUp() {
     //document.querySelector(DOMstrings.pageNumber).textContent = 'Page 1-2';
@@ -53,6 +55,8 @@ function loadApp(){
         try {
             currpg = parseInt(currpg, 10);
             document.cookie = 'pagenum=' + currpg;
+            let pageTrack = JSON.stringify(document.cookie);
+            localStorage.setItem("Key", pageTrack);
             pageReturn();
         } catch (error) {
             console.log(error);
@@ -66,7 +70,8 @@ function loadApp(){
         }
     }, false);
 
-    document.cookie = "pagenum=1";
+    pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
+    document.cookie = pageTrack_deserialized;
 
     readFile = [];
     RespType = "blob";
@@ -112,6 +117,7 @@ function handleFile(X, fileloc){
         }
         console.log("File Read.  First word: " + readFile[0]);
         runPageGet();
+        pageReturn();
     };
 }
 
@@ -166,8 +172,13 @@ function runPageGet(){
 
 
 function pageSet(startidx, endidx, source) {
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     var outtext = '';
     for (let index = startidx; index < endidx; index++){
+        if (index >= source.length) {
+            return outtext;
+        }
         outtext = outtext + " " + source[index];
     }
     return outtext;
@@ -253,6 +264,7 @@ function pullDefPage() {
     );
 }
 
+//
 function pullQuizPage() {
     window.defPage = false;
     console.log("Trying to pull Quiz Page")
@@ -264,6 +276,7 @@ function pullQuizPage() {
     );
 }
 
+//
 export function btnHandler(btnVal) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
@@ -288,8 +301,10 @@ async function backToBook() {
     pageReturn();
 }
 
+//
 function pageReturn() {
-    var currpg = document.cookie;
+    pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
+    var currpg = pageTrack_deserialized;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
     startidx = (currpg - 1) * stdDiff;
@@ -311,6 +326,8 @@ function pageReturn() {
         try {
             currpg = parseInt(currpg, 10);
             document.cookie = 'pagenum=' + currpg;
+            let pageTrack = JSON.stringify(document.cookie);
+            localStorage.setItem("Key", pageTrack);
             pageReturn();
         } catch (error) {
             currpg = document.cookie;
@@ -323,6 +340,7 @@ function pageReturn() {
         }
     }, false);
 }
+
 //Takes away triple click
 document.querySelector('div').addEventListener('click', function (evt) {
     if (evt.detail >= 3) {
@@ -336,13 +354,16 @@ function nextPage(){
     var currpg = document.cookie;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
-    var newpg = currpg + 1;
-    document.cookie = "pagenum=" + newpg;
     text1 = '';
     text2 = '';
     //startidx = endidx;
     //endidx = endidx + cacheDiff;
     text1 = pageSet(startidx, endidx, readFile);
+    if (text1.length < stdDiff) {
+        return;
+    }
+    var newpg = currpg + 1;
+    document.cookie = "pagenum=" + newpg;
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
 
@@ -394,6 +415,8 @@ function nextChapter() {
     }
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     document.cookie = "pagenum=" + newpg;
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     pageReturn();
 }
 
@@ -409,11 +432,13 @@ function backChapter() {
             break;
         }
     }
-    if (target == null) {
+    if (target == null || target < 0) {
         //TODO: raise error
         return;
     }
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     document.cookie = "pagenum=" + newpg;
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     pageReturn();
 }
