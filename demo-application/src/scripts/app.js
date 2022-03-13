@@ -358,7 +358,7 @@ async function backToBook() {
     pageReturn();
 }
 
-
+/**
  * Returns to book page from elsewhere
  * @param {int} prevPg optional value for a specific page to return to
  * @returns No return, return used to force exit early from method
