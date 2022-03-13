@@ -17,6 +17,8 @@ var readFile;
 var RespType;
 var FileType;
 var chapterKeys = [];
+var pageTrack;
+var pageTrack_deserialized;
 
 export function AppStartUp() {
     //On launch, we stall loading the page until the JQuery is loaded
@@ -64,6 +66,9 @@ function loadApp(){
                 return;
             }
             document.cookie = 'pagenum=' + currpg;
+            let pageTrack = JSON.stringify(document.cookie);
+            localStorage.setItem("Key", pageTrack);
+
             pageReturn(cookiePg);
         } catch (error) {
             console.log(error);
@@ -77,8 +82,8 @@ function loadApp(){
         }
     }, false);
 
-    //initally set the page number cookie to page 1
-    document.cookie = "pagenum=1";
+    pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
+    document.cookie = pageTrack_deserialized;
 
     readFile = [];
     RespType = "blob";
@@ -138,6 +143,7 @@ function handleFile(X, fileloc){
         //console.log("File Read.  First word: " + readFile[0]);
         //loads pages
         runPageGet();
+        pageReturn();
     };
 }
 
@@ -209,6 +215,8 @@ function runPageGet(){
  * @returns text value for the page as a single string
  */
 function pageSet(startidx, endidx, source) {
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     var outtext = '';
     for (let index = startidx; index < endidx; index++){
         if (index >= source.length) {
@@ -303,6 +311,7 @@ function pullDefPage() {
     );
 }
 
+
 /**
  * Reloads the app using the Quiz Page
  */
@@ -317,6 +326,7 @@ function pullQuizPage() {
         document.getElementById('root')
     );
 }
+
 
 //button handler needed for other pages, called from HTML
 export function btnHandler(btnVal) {
@@ -348,14 +358,14 @@ async function backToBook() {
     pageReturn();
 }
 
-/**
+
  * Returns to book page from elsewhere
  * @param {int} prevPg optional value for a specific page to return to
  * @returns No return, return used to force exit early from method
  */
 function pageReturn(prevPg = null) {
-    //grabs last page stored in the document cookie
-    var currpg = document.cookie;
+    pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
+    var currpg = pageTrack_deserialized;
     currpg = currpg.split("=");
     currpg = parseInt(currpg[1], 10);
 
@@ -374,6 +384,7 @@ function pageReturn(prevPg = null) {
     text1 = pageSet(startidx, endidx, readFile);
     //load text onto page
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
+
     //if page was last page, stop
     if (text1.length < stdDiff) {
         return;
@@ -398,6 +409,8 @@ function pageReturn(prevPg = null) {
         try {
             currpg = parseInt(currpg, 10);
             document.cookie = 'pagenum=' + currpg;
+            let pageTrack = JSON.stringify(document.cookie);
+            localStorage.setItem("Key", pageTrack);
             pageReturn();
         } catch (error) {
             currpg = document.cookie;
@@ -410,6 +423,7 @@ function pageReturn(prevPg = null) {
         }
     }, false);
 }
+
 //Takes away triple click
 document.querySelector('div').addEventListener('click', function (evt) {
     if (evt.detail >= 3) {
@@ -433,12 +447,14 @@ function nextPage(){
     text1 = pageSet(startidx, endidx, readFile);
     //load text 1 onto page
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
+
     //check if page is last page
     if (text1.length < stdDiff) {
         document.querySelector(DOMstrings.pageNumber).textContent = currpg + 1;
         return;
     }
     var newpg = currpg + 1;
+  
     //set page number at bottom of page
     document.cookie = "pagenum=" + newpg;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
@@ -515,6 +531,9 @@ function nextChapter() {
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     //set document cookie to new page
     document.cookie = "pagenum=" + newpg;
+  
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //loads new page
     pageReturn();
 }
@@ -537,6 +556,7 @@ function backChapter() {
             break;
         }
     }
+  
     //checks if in the first chapter
     if (target == null || target < 0) {
         //TODO: raise error
@@ -546,6 +566,9 @@ function backChapter() {
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     //sets document cookie to new page
     document.cookie = "pagenum=" + newpg;
+  
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //loads new page
     pageReturn();
 }
