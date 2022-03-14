@@ -96,7 +96,7 @@ const IntroPage = () => {
                 </div>
                 <div className='read'>
                     <center>
-                        <Button text='Begin Reading'/>
+                    <button onClick={function (e) {btnHandler(document.getElementById('startBook').textContent)}} className='button' id='startBook'>Begin Reading</button>
                     </center>
                 </div>
 
@@ -108,6 +108,7 @@ const IntroPage = () => {
 
 const bookStyle = {
   backgroundColor: '#949292',
+  overflow: 'scroll',
 }
 
 export default IntroPage;

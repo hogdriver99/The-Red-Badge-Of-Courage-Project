@@ -1,0 +1,17 @@
+import './App.css';
+import Book from './components/Book';
+import ControlPanel from './components/ControlPanel';
+import Menu from './components/Menu';
+
+function AppDuplicate() {
+  return (
+    <div className="app" id="app">
+      <Menu />
+      <Book />
+      <ControlPanel />
+    </div>
+  );
+}
+
+
+export default AppDuplicate;

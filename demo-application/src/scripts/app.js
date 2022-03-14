@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from '../App';
 import AppQuizPage from '../AppQuizPage';
+import AppIntroPage from '../AppIntroPage';
+import AppDuplicate from '../AppDuplicate';
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -22,7 +24,16 @@ var pageTrack_deserialized;
 
 export function AppStartUp() {
     //On launch, we stall loading the page until the JQuery is loaded
-    awaitJQuery(loadApp);
+    awaitJQuery(loadIntro);
+}
+
+function loadIntro() {
+    ReactDOM.render(
+        <React.StrictMode>
+            <AppIntroPage />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
 }
 
 function awaitJQuery(callback) {
@@ -339,6 +350,14 @@ export function btnHandler(btnVal) {
     } else if (btnVal == 'wordA' || btnVal == 'wordB' || btnVal =='wordC' || btnVal == 'wordD') {
         backToBook();
         window.location.reload();
+    } else if (btnVal == "Begin Reading") {
+        ReactDOM.render(
+            <React.StrictMode>
+                <AppDuplicate />
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+        loadApp();
     }
 }
 
@@ -350,7 +369,7 @@ async function backToBook() {
     //forces rerender.  NOTE: Event Listeners must be reloaded
     await ReactDOM.render(
         <React.StrictMode>
-            <App />
+            <AppDuplicate />
         </React.StrictMode>,
         document.getElementById('root')
     );
