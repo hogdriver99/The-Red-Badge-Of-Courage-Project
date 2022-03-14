@@ -5,10 +5,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppStartUp } from './scripts/app.js';
+import AppDefPage from './AppDefPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {(!window.defPage) ? <App /> : <AppDefPage />}
   </React.StrictMode>,
   document.getElementById('root')
 );

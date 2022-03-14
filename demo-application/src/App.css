@@ -2,7 +2,11 @@
   text-align: center;
 }
 
-/* 
+::selection {
+  background: #ffff66;
+}
+
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
