@@ -20,14 +20,21 @@ body {
 
 /* NAVIGATION SIDE BAR */
 .navSideBar {
-  background-color: #A6F0C6;
+  background-color:#A6F0C6;
   position: absolute;
   left: 0%;
   top: 80px;
   width: 300px;
-  height: 82%;
+  height: 80%;
   z-index: 2;
   padding: 20px;
+  /* border-style: solid solid hidden solid; */
+  border-width: 10px;
+  border-radius: 0px 10px 10px 0px;
+  border-color:#A6F0C6;
+  box-shadow: 0 0 10px #949292;
+  z-index: 1;
+  /* border */
 }
 
 .navContainer {
@@ -70,8 +77,8 @@ body {
   align-self: center;
   position: absolute;
   bottom: 0px;
-  background-color: #A6F0C6;
-  z-index: 1;
+  /* background-color: #A6F0C6; */
+  /* z-index: 2; */
 }
 
 /* BOOK */
