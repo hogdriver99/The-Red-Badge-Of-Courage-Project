@@ -4,6 +4,7 @@ import Icon from './Icon';
 import home from '../images/home.png'
 
 const NavSideBar = ({mobile}) => {
+    mobile = false
     return (
         <div className='navSideBar'>
             <div className='navContainer'>
