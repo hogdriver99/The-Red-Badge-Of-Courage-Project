@@ -289,6 +289,10 @@ body {
   align-self: center;
 } */
 
+#top {
+  z-index: 1;
+}
+
 .craneImg {
   height: 270px;
   width: 100%;
