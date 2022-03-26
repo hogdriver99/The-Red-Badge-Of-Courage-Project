@@ -11,9 +11,13 @@ function App() {
   const [introPage, setIntroPage] = useState(false);
   const introPageOnClick = () => {
     setIntroPage(!introPage)
-    console.log(introPage)
   }
 
+  const [imgPage, setImgPage] = useState(false);
+  const imgPageOnClick = () => {
+    setImgPage(!imgPage)
+  }
+  
   return (
     <div className="app" id="app">
       <Menu introPageOnClick={introPageOnClick}/>
@@ -22,7 +26,7 @@ function App() {
       <ControlPanel />
 
       {introPage && <div className="hideControl" id="introBtn">
-        <Button text='More Pictures' onClick={() => introPageOnClick()}/>
+        <Button text='More Pictures' onClick={() => imgPageOnClick()}/>
         <Button text='Proceed to the Book' onClick={() => introPageOnClick()}/>
       </div> }
       

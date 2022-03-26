@@ -18,7 +18,7 @@ function pageName(pageSide) {
 
 const pageStyle = {
   maxWidth: '520px',
-  maxHeight: '500px',
+  maxHeight: '800px',
   overflow: 'auto',
   whiteSpace: 'pre-wrap'
 }

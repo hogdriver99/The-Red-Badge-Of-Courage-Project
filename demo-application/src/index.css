@@ -112,18 +112,22 @@ body {
 /* Mobile First - one page initially*/
 .content-left {
   position: absolute;
-  top: 10%;
-  right: 8%;
-  width: 84%;
-  height: 80%;
+  top: 20px;
+  right: 5%;
+  width: 90%;
+  /* height: 80%; */
+  bottom: 20px;
 }
 
 .content-right {
+  /* background-color: #A6F0C6; */
   position: absolute;
-  top: 10%;
-  right: 7%;
-  width: 42%;
-  height: 80%;
+  top: 20px;
+  right: 5%;
+  /* left:10px; */
+  width: 44%;
+  bottom: 20px;
+  /* height: 80%; */
   visibility: hidden;
 }
 
@@ -319,10 +323,11 @@ body {
 @media (min-width: 800px) {
   .content-left {
     position: absolute;
-    top: 10%;
-    left: 7%;
-    width: 42%;
-    height: 80%;
+    top: 20px;
+    left: 5%;
+    width: 44%;
+    /* height: 80%; */
+    bottom: 20px;
   }
 
   .content-right {
