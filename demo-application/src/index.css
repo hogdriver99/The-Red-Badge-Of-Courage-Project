@@ -33,7 +33,7 @@ body {
   border-radius: 0px 10px 10px 0px;
   border-color:#A6F0C6;
   box-shadow: 0 0 10px #949292;
-  z-index: 1;
+  z-index: 3;
   /* border */
 }
 
@@ -91,19 +91,9 @@ body {
   /* transform: translate(-50%, -50%); */
   overflow: hidden;
   padding: 20px;
-}
-
-.bookContainerIntro {
-  width: 90%;
-  height: 85%;
-  position: absolute;
-  align-self: center;
-  top: 60px;
-  /* transform: translate(-50%, -50%); */
-  overflow: hidden;
-  padding: 20px;
   z-index: 1;
 }
+
 .book {
   /* display: flex;
   flex-direction: row; */
@@ -246,11 +236,23 @@ body {
 
 /* Intro Page */
 
+
+.bookContainerIntro {
+  width: 90%;
+  height: 85%;
+  position: absolute;
+  align-self: center;
+  top: 60px;
+  /* transform: translate(-50%, -50%); */
+  overflow: hidden;
+  padding: 20px;
+  z-index: 2;
+}
+
 #introBtn {
   position: absolute;
-  bottom: 10px;
+  /* bottom: 10px; */
   align-self: center;
-  width: 85%;
   padding: 10px;
 
   /* display: flex;
@@ -260,8 +262,57 @@ body {
   align-items: center; */
 }
 
-#continueBtn {
+.intro {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: nowrap; */
+  justify-content: flex-start;
+  align-items: center;
+  /* padding: 20px; */
+
+  position: absolute;
+  top: 20px;
   align-self: center;
+  right: 8%;
+  width: 84%;
+  /* height: 80%; */
+  bottom: 20px;
+  /* background-color: #A6F0C6; */
+  overflow: scroll;
+  /* position: absolute; */
+}
+/* #continueBtn {
+  align-self: center;
+} */
+
+.craneImg {
+  height: 270px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#crane {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#item {
+  margin: 10px;
+}
+
+.hideControl {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  /* align-self: center; */
+  position: absolute;
+  bottom: 0px;
+  background-color: #A6F0C6;
 }
 
 /* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */

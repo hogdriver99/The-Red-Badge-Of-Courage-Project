@@ -19,8 +19,13 @@ function App() {
       <Menu introPageOnClick={introPageOnClick}/>
       {introPage && <IntroPage />}
       <Book />
-      {!introPage && <ControlPanel />}
-      {introPage && <Button id='introBtn' text='Proceed to the Book' onClick={() => introPageOnClick()}/>}
+      <ControlPanel />
+
+      {introPage && <div className="hideControl" id="introBtn">
+        <Button text='More Pictures' onClick={() => introPageOnClick()}/>
+        <Button text='Proceed to the Book' onClick={() => introPageOnClick()}/>
+      </div> }
+      
     </div>
   );
 }

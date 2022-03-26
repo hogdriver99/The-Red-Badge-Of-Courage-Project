@@ -5,6 +5,7 @@ import Button from './Button'
 import NavSideBar from './NavSideBar'
 import IntroPage from './IntroPage'
 import { useEffect, useState } from 'react'
+import crane from "../civilWarImages/crane.jpg"
 
 const Menu = ({introPageOnClick}) => {
     // Showing Mobile Version
@@ -60,7 +61,7 @@ const Menu = ({introPageOnClick}) => {
                     {!showMobileMenu && <Icon image={nav} name='nav' onClick={navOnClick}/>}
                     {!showMobileMenu && <Icon image={home} name='home'/>}
                     {/* Intro Page button */}
-                    {!showMobileMenu && <Icon image={home} name='home' onClick={() => introPageOnClick()}/>}
+                    {!showMobileMenu && <Icon image={crane} name='home' onClick={() => introPageOnClick()}/>}
                 </div>
                 {/* {!showMobileMenu && <Button text='Intro'/>} */}
                 {!showMobileMenu && <h1>The Red Badge of Courage</h1>}
