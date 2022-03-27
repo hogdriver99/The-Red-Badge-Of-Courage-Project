@@ -8,13 +8,14 @@ import { useEffect, useState } from 'react'
 import Button from './components/Button';
 
 function App() {
-  //state variable to know we're in intro page or not
+  //intro page state variable
   const [introPage, setIntroPage] = useState(false);
   const introPageOnClick = () => {
     setIntroPage(!introPage)
     setImgPage(false)
   }
 
+  // images page state variable
   const [imgPage, setImgPage] = useState(false);
   const imgPageOnClick = () => {
     setImgPage(!imgPage)
@@ -24,14 +25,20 @@ function App() {
   return (
     <div className="app" id="app">
       <Menu introPageOnClick={introPageOnClick}/>
+      {/* Showing intro/Images pages*/}
       {introPage && <IntroPage />}
       {imgPage && <ImgPage />}
+
       <Book />
       <ControlPanel />
 
+      {/* Bottom menu buttons for Intro/Images pages */}
       {introPage && <div className="hideControl" id="introBtn">
+        {/* Left button */}
         {!imgPage && <Button text='More Pictures' onClick={() => imgPageOnClick()}/>}
         {imgPage && <Button text='Back to Intro' onClick={() => imgPageOnClick()}/>}
+
+        {/* Right Button */}
         <Button text='Proceed to the Book' onClick={() => introPageOnClick()}/>
       </div> }
       

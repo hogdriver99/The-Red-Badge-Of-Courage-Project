@@ -3,10 +3,10 @@ import home from '../images/home.png'
 import Icon from './Icon'
 import Button from './Button'
 import NavSideBar from './NavSideBar'
-import IntroPage from './IntroPage'
 import { useEffect, useState } from 'react'
 import crane from "../civilWarImages/crane.jpg"
 
+// Get introPageOnClick function to call it when intro page icon is pressed
 const Menu = ({introPageOnClick}) => {
     // Showing Mobile Version
     var initMobile = (window.innerWidth > 800? false: true)
@@ -34,50 +34,30 @@ const Menu = ({introPageOnClick}) => {
         };
     }, []);
 
-    // Showing the navigation side bar
+    // Showing the navigation side bar state variable
     const [showNavBar, setShowNavBar] = useState(false)
     const navOnClick = () => {
         setShowNavBar(!showNavBar)
     }
 
-    // Showing intro page
-    // const [showInroPage, setIntroPage] = useState(false)
-    // const introPageOnClick = () => {
-    //     setIntroPage(!showInroPage)
-    // }
-    // let showIntroPageNow = false
-    // let getShowIntroPage = () => {
-    //     console.log(showIntroPageNow)
-    //     showIntroPageNow = !showIntroPageNow
-    //     console.log(showIntroPageNow)
-    //     return showIntroPageNow
-    // }
-
     return (
         <>
             <div className='menu' style={menuStyle}>
-                {/* {showMobileMenu && <Icon image={nav} name='nav' onClick={navOnClick}/>} */}
-                {/* {!showMobileMenu &&  */}
                 <div>
                     <Icon image={nav} name='nav' onClick={navOnClick}/>
                     <Icon image={home} name='home'/>
                     {/* Intro Page button */}
-                    <Icon image={crane} name='home' onClick={() => introPageOnClick()}/>
+                    <Icon image={crane} name='crane' onClick={() => introPageOnClick()}/>
                 </div>
 
-                {/* {showMobileMenu && <Icon image={nav} name='nav' onClick={navOnClick}/>} */}
-                {/* {showMobileMenu && <Icon image={home} name='home'/>} */}
-                {/* Intro Page button */}
-                {/* {showMobileMenu && <Icon image={crane} name='home' onClick={() => introPageOnClick()}/>} */}
-
+                {/* Show only when big screen */}
                 {!showMobileMenu && <h1>The Red Badge of Courage</h1>}
-                {/* {showMobileMenu && <h1 id='h1small'>The Red Badge of Courage</h1>} */}
+
                 <Button text='Log In'/>
             </div>
-            {showNavBar && <NavSideBar mobile={showMobileMenu}/>}
-            {/* <NavSideBar mobile={showMobileMenu}/> */}
-            {/* <IntroPage /> */}
 
+            {/* Show navigation side bar */}
+            {showNavBar && <NavSideBar mobile={showMobileMenu}/>}
         </>
         
     )
