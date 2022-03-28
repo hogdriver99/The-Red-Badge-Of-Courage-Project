@@ -3,15 +3,17 @@ import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
 const QuizPage = () => {
+
+  let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
+
   return (
     <div className='bookContainer'>
         <div className='book' style={bookStyle}>
           <div className='defPage'>
             <div className='definitionWord'>
               <center>
-              <h1>
-                Definition:
-              </h1>
+              <h1> Definition: </h1>
+              <p>{tempText}</p>
               </center> 
             </div>
             <div className = "optionButtons">

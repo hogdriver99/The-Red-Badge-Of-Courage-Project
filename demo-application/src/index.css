@@ -253,15 +253,8 @@ body {
 
 #introBtn {
   position: absolute;
-  /* bottom: 10px; */
   align-self: center;
   padding: 10px;
-
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center; */
 }
 
 .intro {
@@ -283,20 +276,57 @@ body {
   overflow: scroll;
   /* position: absolute; */
 }
-/* #continueBtn {
-  align-self: center;
-} */
 
-#top {
-  z-index: 1;
-}
-
+/* In intro Page */
 .craneImg {
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 20px;
+  justify-content: space-around; */
   height: 270px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+/* Images Page */
+.introImg {
+
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: flex-start;
+  padding: 20px;
+  
+  /* height: 270px; */
+  
+  /* justify-content: space-around; */
+  /* overflow: scroll; */
+  /* position: absolute;
+  top: 20px;
+  align-self: center; */
+  /* right: 8%; */
+  /* max-width: 84%; */
+
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  align-self: center;
+  right: 8%;
+  width: 84%;
+  overflow: scroll; */
+}
+
+#top {
+  z-index: 1;
 }
 
 #crane {
@@ -308,6 +338,18 @@ body {
   margin: 10px;
 }
 
+/* TO FIX */
+#imgItem {
+  margin: 20px;
+  max-height: 600px;
+  max-width: 300px;
+  /* min-height: 400px; */
+  /* max-width: 800px; */
+}
+
+#longBtn {
+  width:48%;
+}
 .hideControl {
   display: flex;
   flex-direction: row;

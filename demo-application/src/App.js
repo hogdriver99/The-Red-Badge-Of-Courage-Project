@@ -35,11 +35,11 @@ function App() {
       {/* Bottom menu buttons for Intro/Images pages */}
       {introPage && <div className="hideControl" id="introBtn">
         {/* Left button */}
-        {!imgPage && <Button text='More Pictures' onClick={() => imgPageOnClick()}/>}
-        {imgPage && <Button text='Back to Intro' onClick={() => imgPageOnClick()}/>}
+        {!imgPage && <Button id="longBtn" text='More Pictures' onClick={() => imgPageOnClick()}/>}
+        {imgPage && <Button id="longBtn" text='Back to Intro' onClick={() => imgPageOnClick()}/>}
 
         {/* Right Button */}
-        <Button text='Proceed to the Book' onClick={() => introPageOnClick()}/>
+        <Button id="longBtn" text='Proceed to the Book' onClick={() => introPageOnClick()}/>
       </div> }
       
     </div>
