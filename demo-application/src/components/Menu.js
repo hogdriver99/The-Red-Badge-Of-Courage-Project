@@ -4,8 +4,10 @@ import Icon from './Icon'
 import Button from './Button'
 import NavSideBar from './NavSideBar'
 import { useEffect, useState } from 'react'
+import crane from "../civilWarImages/crane.jpg"
 
-const Menu = () => {
+// Get introPageOnClick function to call it when intro page icon is pressed
+const Menu = ({introPageOnClick}) => {
     // Showing Mobile Version
     var initMobile = (window.innerWidth > 800? false: true)
     const [showMobileMenu, setShowMobileMenu] = useState(initMobile)
@@ -32,7 +34,7 @@ const Menu = () => {
         };
     }, []);
 
-    // Showing the navigation side bar
+    // Showing the navigation side bar state variable
     const [showNavBar, setShowNavBar] = useState(false)
     const navOnClick = () => {
         setShowNavBar(!showNavBar)
@@ -41,15 +43,20 @@ const Menu = () => {
     return (
         <>
             <div className='menu' style={menuStyle}>
-                {showMobileMenu && <Icon image={nav} name='nav' onClick={navOnClick}/>}
                 <div>
-                    {!showMobileMenu && <Icon image={nav} name='nav' onClick={navOnClick}/>}
-                    {!showMobileMenu && <Icon image={home} name='home'/>}
+                    <Icon image={nav} name='nav' onClick={navOnClick}/>
+                    <Icon image={home} name='home'/>
+                    {/* Intro Page button */}
+                    <Icon image={crane} name='crane' onClick={() => introPageOnClick()}/>
                 </div>
+
+                {/* Show only when big screen */}
                 {!showMobileMenu && <h1>The Red Badge of Courage</h1>}
-                {showMobileMenu && <h1 id='h1small'>The Red Badge of Courage</h1>}
-                {!showMobileMenu && <Button text='Log In'/>}
+
+                <Button text='Log In'/>
             </div>
+
+            {/* Show navigation side bar */}
             {showNavBar && <NavSideBar mobile={showMobileMenu}/>}
         </>
         

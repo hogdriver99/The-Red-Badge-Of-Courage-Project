@@ -33,7 +33,7 @@ body {
   border-radius: 0px 10px 10px 0px;
   border-color:#A6F0C6;
   box-shadow: 0 0 10px #949292;
-  z-index: 1;
+  z-index: 3;
   /* border */
 }
 
@@ -91,6 +91,7 @@ body {
   /* transform: translate(-50%, -50%); */
   overflow: hidden;
   padding: 20px;
+  z-index: 1;
 }
 
 .book {
@@ -111,18 +112,22 @@ body {
 /* Mobile First - one page initially*/
 .content-left {
   position: absolute;
-  top: 10%;
-  right: 8%;
-  width: 84%;
-  height: 80%;
+  top: 20px;
+  right: 5%;
+  width: 90%;
+  /* height: 80%; */
+  bottom: 20px;
 }
 
 .content-right {
+  /* background-color: #A6F0C6; */
   position: absolute;
-  top: 10%;
-  right: 7%;
-  width: 42%;
-  height: 80%;
+  top: 20px;
+  right: 5%;
+  /* left:10px; */
+  width: 44%;
+  bottom: 20px;
+  /* height: 80%; */
   visibility: hidden;
 }
 
@@ -233,14 +238,140 @@ body {
   border-radius: 0%;
 }
 
+/* Intro Page */
+.bookContainerIntro {
+  width: 90%;
+  height: 85%;
+  position: absolute;
+  align-self: center;
+  top: 60px;
+  /* transform: translate(-50%, -50%); */
+  overflow: hidden;
+  padding: 20px;
+  z-index: 2;
+}
+
+#introBtn {
+  position: absolute;
+  align-self: center;
+  padding: 10px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: nowrap; */
+  justify-content: flex-start;
+  align-items: center;
+  /* padding: 20px; */
+
+  position: absolute;
+  top: 20px;
+  align-self: center;
+  right: 8%;
+  width: 84%;
+  /* height: 80%; */
+  bottom: 20px;
+  /* background-color: #A6F0C6; */
+  overflow: scroll;
+  /* position: absolute; */
+}
+
+/* In intro Page */
+.craneImg {
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 20px;
+  justify-content: space-around; */
+  height: 270px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* Images Page */
+.introImg {
+
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: flex-start;
+  padding: 20px;
+  
+  /* height: 270px; */
+  
+  /* justify-content: space-around; */
+  /* overflow: scroll; */
+  /* position: absolute;
+  top: 20px;
+  align-self: center; */
+  /* right: 8%; */
+  /* max-width: 84%; */
+
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  align-self: center;
+  right: 8%;
+  width: 84%;
+  overflow: scroll; */
+}
+
+#top {
+  z-index: 1;
+}
+
+#crane {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#item {
+  margin: 10px;
+}
+
+/* TO FIX */
+#imgItem {
+  margin: 20px;
+  max-height: 600px;
+  max-width: 300px;
+  /* min-height: 400px; */
+  /* max-width: 800px; */
+}
+
+#longBtn {
+  width:48%;
+}
+.hideControl {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  /* align-self: center; */
+  position: absolute;
+  bottom: 0px;
+  background-color: #A6F0C6;
+}
+
 /* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {
   .content-left {
     position: absolute;
-    top: 10%;
-    left: 7%;
-    width: 42%;
-    height: 80%;
+    top: 20px;
+    left: 5%;
+    width: 44%;
+    /* height: 80%; */
+    bottom: 20px;
   }
 
   .content-right {
