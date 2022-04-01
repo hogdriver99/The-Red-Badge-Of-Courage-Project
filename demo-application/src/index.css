@@ -203,6 +203,32 @@ body {
 
 /* QUIZ PAGE */
 
+.stars {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 100%;
+  align-items: center;
+  top: -40px;
+  right: 7%;
+  /* width: 70px; */
+}
+
+#defLabel {
+  align-self: center;
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  /* right: 20%; */
+}
+
+.defLabelText {
+  position: relative;
+  top:70px;
+  height: 30%;
+  text-overflow: clip;
+}
+
 .quizButton1 {
   position: absolute;
   left: 7%;
@@ -384,7 +410,7 @@ body {
   }
 
   .defPage {
-    height: 70%;
-    width: 70%;
+    height: 90%;
+    width: 80%;
   }
 }
