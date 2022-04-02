@@ -3,7 +3,7 @@ import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
 
-const DefPage = ({text}) => {
+const DefPage = () => {
   let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
 
   return (
