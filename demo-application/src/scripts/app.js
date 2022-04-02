@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from '../App';
 import AppQuizPage from '../AppQuizPage';
+import defenitions from './worddefs.json'
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -336,8 +337,12 @@ function pullQuizPage(text) {
 let correctChoice = 0;
 
 export function getBtnVals() {
+
+    // let defData = JSON.parse(defenitions)
+
     // get data from json file (def, correct word, dummy words)
-    let defenition = "This is the defenition"
+    console.log(defenitions[text], defenitions['aback'])
+    let defenition = defenitions[text]
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
 
     // Assign correct choice 
@@ -353,8 +358,8 @@ export function getBtnVals() {
             word[i] = dummyWords.pop()
         }
     }
-
-    // console.log(word, text)
+    word.push(defenition)
+    console.log(word, text)
     return word
 }
 

@@ -8,9 +8,12 @@ import silverStar from '../images/Silver-Star-Blank.png'
 
 const QuizPage = ({text}) => {
 
+  console.log("1")
+  let word = getBtnVals(text)
+  console.log("2")
   let tempText = "hey this is a def just for teating purposes"
+  tempText = word.pop()
 
-  let word = getBtnVals()
   // Needs to be for a specific word -> somehow find out what word it was
   // Stay here until 5 correct
   // change function to check for correct answer
@@ -39,7 +42,7 @@ const QuizPage = ({text}) => {
 
       setStars(stars+1)
       console.log(stars)
-      
+
     } else {
       // Always store highest silver score
       if (stars > silverStars) {
