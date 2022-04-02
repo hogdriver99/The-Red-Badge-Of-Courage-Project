@@ -338,10 +338,8 @@ let correctChoice = 0;
 
 export function getBtnVals() {
 
-    // let defData = JSON.parse(defenitions)
-
     // get data from json file (def, correct word, dummy words)
-    console.log(defenitions[text], defenitions['aback'])
+    // console.log(defenitions[text], defenitions['aback'])
     let defenition = defenitions[text]
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
 
@@ -370,25 +368,21 @@ let checkAnswer = (choice) => {
         case 0:
             if (choice == 'wordA') {
                 answer = true
-                // console.log("assign", correctChoice, choice)
             }
             break;
         case 1:
             if (choice == 'wordB') {
                 answer = true
-                // console.log("assign", correctChoice, choice)
             }
             break;
         case 2:
             if (choice == 'wordC') {
                 answer = true
-                // console.log("assign", correctChoice, choice)
             }
             break;
         case 3:
             if (choice == 'wordD') {
                 answer = true
-                // console.log("assign", correctChoice, choice)
             }
             break;
     }

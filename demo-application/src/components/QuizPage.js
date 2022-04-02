@@ -8,20 +8,15 @@ import silverStar from '../images/Silver-Star-Blank.png'
 
 const QuizPage = ({text}) => {
 
-  console.log("1")
   let word = getBtnVals(text)
-  console.log("2")
-  let tempText = "hey this is a def just for teating purposes"
-  tempText = word.pop()
-
-  // Needs to be for a specific word -> somehow find out what word it was
-  // Stay here until 5 correct
-  // change function to check for correct answer
-  // display the stars and record correct or wrong answers
+  let tempText = "This word is not defined"
+  let displayText = word.pop()
+  if (displayText) {
+    tempText = displayText
+  }
 
   // state var to keep stack of stars
   const [stars, setStars] = useState(0);
-  // -1 - silver, 0 - non, 1 - golden
   const [starsArray, setStarsArray] = useState([false,false,false,false,false]);
   const [silverStars, setSilverStars] = useState(0);
   const [silverStarsArray, setSilverStarsArray] = useState([false,false,false,false,false]);
