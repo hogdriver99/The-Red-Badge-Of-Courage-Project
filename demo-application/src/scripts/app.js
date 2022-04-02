@@ -344,9 +344,6 @@ function findDef(word) {
     } else {
         return "not defined"
     }
-
-
-
 }
 
 
