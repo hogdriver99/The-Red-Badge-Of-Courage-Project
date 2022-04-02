@@ -196,11 +196,11 @@ function runPageGet(){
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
     //sets the page numbers at bottom of the page
     document.querySelector(DOMstrings.pageNumber).textContent = "1-2"
-    
+
     //updates the indices for page 2
     startidx = endidx;
     endidx = endidx + stdDiff;
-    
+
     //sets the text for the second page
     text2 = pageSet(startidx, endidx, readFile);
     //loads the text for page 2 onto the page
@@ -232,6 +232,7 @@ $(window).on("load", function() {
 
     var point = $('p');
     point.css({ cursor: 'pointer' });
+    var dbltext;
 
     point.click(function(e) {
 
@@ -286,12 +287,20 @@ $(window).on("load", function() {
         }
 
         var text = $.trim(selection.toString());
-        selection.collapse();
+
+        dbltext = text.replace(/[']/g, "");
+        dbltext.replace(/\s+/g," ")
+        dbltext = dbltext.toLowerCase();
+
+
+        window.setTimeout(() => {
+            window.getSelection().empty();
+        }, 5000);
     });
 
     point.dblclick(function(f) {
         console.log("Trying to pull def page");
-        pullDefPage();
+        pullDefPage(dbltext);
     });
 
 });
@@ -299,7 +308,7 @@ $(window).on("load", function() {
 /**
  * Reloads the app using the Definition Page
  */
-function pullDefPage() {
+function pullDefPage(word) {
     window.defPage = true;
     // console.log(AppDefPage);
     //forces a rerender. NOTE: Event Listeners must be reloaded on return
@@ -309,6 +318,46 @@ function pullDefPage() {
         </React.StrictMode>,
         document.getElementById('root')
     );
+
+    defPageReturn(word);
+}
+
+function findDef(word) {
+    const jsonData = require('../scripts/worddefs.json');
+    console.log(jsonData);
+
+    var result = jsonData;
+
+    var words = [];
+    var def;
+
+    words = Object.entries(result);
+    console.log(words);
+
+    console.log(word);
+
+    var def = words.find(key => key[0] == word);
+    if (def != null) {
+        def = def[1];
+        console.log(def)
+        return def;
+    } else {
+        return "not defined"
+    }
+
+
+
+}
+
+
+function defPageReturn(word) {
+    var def = findDef(word);
+    let title = document.querySelector("h2");
+    title.innerHTML =  word + "";
+    title.style.fontSize = "32px";
+
+    let definition = document.querySelector("h3");
+    definition.innerHTML =  def;
 }
 
 
@@ -358,7 +407,7 @@ async function backToBook() {
     pageReturn();
 }
 
-
+/**
  * Returns to book page from elsewhere
  * @param {int} prevPg optional value for a specific page to return to
  * @returns No return, return used to force exit early from method
@@ -398,7 +447,7 @@ function pageReturn(prevPg = null) {
     text2 = pageSet(startidx, endidx, readFile);
     //load text onto page
     document.querySelector(DOMstrings.pageRight).textContent = text2;
-    
+
     //Reloads all Event Listeners. VERY IMPORTANT
     document.getElementById("nextpage").addEventListener("click", nextPage);
     document.getElementById("backpage").addEventListener("click", backPage);
@@ -454,11 +503,11 @@ function nextPage(){
         return;
     }
     var newpg = currpg + 1;
-  
+
     //set page number at bottom of page
     document.cookie = "pagenum=" + newpg;
     document.querySelector(DOMstrings.pageNumber).textContent = newpg + "-" + (newpg + 1);
-    
+
     //update indices
     startidx = endidx;
     endidx = endidx + stdDiff;
@@ -527,11 +576,11 @@ function nextChapter() {
         //TODO: raise error
         return;
     }
-    //calculates new page 
+    //calculates new page
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     //set document cookie to new page
     document.cookie = "pagenum=" + newpg;
-  
+
     let pageTrack = JSON.stringify(document.cookie);
     localStorage.setItem("Key", pageTrack);
     //loads new page
@@ -556,7 +605,7 @@ function backChapter() {
             break;
         }
     }
-  
+
     //checks if in the first chapter
     if (target == null || target < 0) {
         //TODO: raise error
@@ -566,7 +615,7 @@ function backChapter() {
     var newpg = Math.floor(chapterKeys[target] / stdDiff) + 1;
     //sets document cookie to new page
     document.cookie = "pagenum=" + newpg;
-  
+
     let pageTrack = JSON.stringify(document.cookie);
     localStorage.setItem("Key", pageTrack);
     //loads new page
