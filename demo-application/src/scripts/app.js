@@ -229,14 +229,13 @@ function pageSet(startidx, endidx, source) {
 }
 
 // VARIABLE TO PASS IN CURRENT WORD TO DEF AND QUIZ SCREENS
-let text = ''
+let dbltext = ''
 
 //highlights words on one click
 $(window).on("load", function() {
 
     var point = $('p');
     point.css({ cursor: 'pointer' });
-    var dbltext;
 
 
     point.click(function(e) {
@@ -319,7 +318,7 @@ function pullDefPage(word) {
     //forces a rerender. NOTE: Event Listeners must be reloaded on return
     ReactDOM.render(
         <React.StrictMode>
-          {(!window.defPage) ? <App /> : <AppDefPage text={text}/>}
+          {(!window.defPage) ? <App /> : <AppDefPage />}
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -385,13 +384,15 @@ export function getBtnVals() {
 
     // get data from json file (def, correct word, dummy words)
     // console.log(defenitions[text], defenitions['aback'])
-    let defenition = defenitions[text]
+    let defenition = defenitions[dbltext]
+    console.log(dbltext);
+    console.log(defenition);
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
 
-    // Assign correct choice 
+    // Assign correct choice
     let word = []
     correctChoice = Math.floor(Math.random()*4)
-    word[correctChoice] = text
+    word[correctChoice] = dbltext
 
     console.log(correctChoice)
 
@@ -402,7 +403,7 @@ export function getBtnVals() {
         }
     }
     word.push(defenition)
-    console.log(word, text)
+    console.log(word, dbltext)
     return word
 }
 
@@ -446,12 +447,12 @@ export function endQuiz() {
 export function btnHandler(btnVal, text) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
-        pullQuizPage(text);
+        pullQuizPage(dbltext);
     } else if (btnVal == "Return to book") {
         backToBook();
         window.location.reload();
     } else if (btnVal == 'wordA' || btnVal == 'wordB' || btnVal =='wordC' || btnVal == 'wordD') {
-        
+
         if (quizIsOn) {
             console.log(checkAnswer(btnVal))
             return checkAnswer(btnVal)
