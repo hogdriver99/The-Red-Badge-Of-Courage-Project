@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
+
 const DefPage = ({text}) => {
   let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
 
@@ -11,9 +12,9 @@ const DefPage = ({text}) => {
           <div className='defPage'>
             <div className='definitionWord'>
               <center>
-                <h1>
-                  Word Definition: 
-                </h1>
+                <h2>
+                  Word Definition:
+                </h2>
               </center> 
             </div>
 
