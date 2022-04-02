@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from '../App';
 import AppQuizPage from '../AppQuizPage';
+import defenitions from './worddefs.json'
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -227,12 +228,16 @@ function pageSet(startidx, endidx, source) {
     return outtext;
 }
 
+// VARIABLE TO PASS IN CURRENT WORD TO DEF AND QUIZ SCREENS
+let text = ''
+
 //highlights words on one click
 $(window).on("load", function() {
 
     var point = $('p');
     point.css({ cursor: 'pointer' });
     var dbltext;
+
 
     point.click(function(e) {
 
@@ -314,7 +319,7 @@ function pullDefPage(word) {
     //forces a rerender. NOTE: Event Listeners must be reloaded on return
     ReactDOM.render(
         <React.StrictMode>
-          {(!window.defPage) ? <App /> : <AppDefPage />}
+          {(!window.defPage) ? <App /> : <AppDefPage text={text}/>}
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -361,29 +366,98 @@ function defPageReturn(word) {
 /**
  * Reloads the app using the Quiz Page
  */
-function pullQuizPage() {
+function pullQuizPage(text) {
     window.defPage = false;
     //console.log("Trying to pull Quiz Page")
     //forces a rerender. NOTE: Event Listeners must be reloaded on return
     ReactDOM.render(
         <React.StrictMode>
-            <AppQuizPage />
+            <AppQuizPage text={text}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
+// QUIZ
+let correctChoice = 0;
+
+export function getBtnVals() {
+
+    // get data from json file (def, correct word, dummy words)
+    // console.log(defenitions[text], defenitions['aback'])
+    let defenition = defenitions[text]
+    let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
+
+    // Assign correct choice 
+    let word = []
+    correctChoice = Math.floor(Math.random()*4)
+    word[correctChoice] = text
+
+    console.log(correctChoice)
+
+    // Assign dummy words
+    for (let i = 0; i < 4; i++) {
+        if (i != correctChoice) {
+            word[i] = dummyWords.pop()
+        }
+    }
+    word.push(defenition)
+    console.log(word, text)
+    return word
+}
+
+let checkAnswer = (choice) => {
+    let answer = false
+
+    switch(correctChoice) {
+        case 0:
+            if (choice == 'wordA') {
+                answer = true
+            }
+            break;
+        case 1:
+            if (choice == 'wordB') {
+                answer = true
+            }
+            break;
+        case 2:
+            if (choice == 'wordC') {
+                answer = true
+            }
+            break;
+        case 3:
+            if (choice == 'wordD') {
+                answer = true
+            }
+            break;
+    }
+
+    return answer
+}
+
+let quizIsOn = true
+
+// function to stop the quiz!
+export function endQuiz() {
+    quizIsOn = false
+}
 
 //button handler needed for other pages, called from HTML
-export function btnHandler(btnVal) {
+export function btnHandler(btnVal, text) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
-        pullQuizPage();
+        pullQuizPage(text);
     } else if (btnVal == "Return to book") {
         backToBook();
         window.location.reload();
     } else if (btnVal == 'wordA' || btnVal == 'wordB' || btnVal =='wordC' || btnVal == 'wordD') {
-        backToBook();
+        
+        if (quizIsOn) {
+            console.log(checkAnswer(btnVal))
+            return checkAnswer(btnVal)
+        } else {
+            backToBook();
+        }
         window.location.reload();
     }
 }
@@ -618,3 +692,5 @@ function backChapter() {
     //loads new page
     pageReturn();
 }
+
+

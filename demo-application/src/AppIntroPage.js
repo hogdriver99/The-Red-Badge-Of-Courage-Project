@@ -1,17 +1,19 @@
 import './App.css';
-import QuizPage from './components/QuizPage';
+import IntroPage from './components/IntroPage';
 import ControlPanel from './components/ControlPanel';
 import Menu from './components/Menu';
+import './index.css';
 
-function AppQuizPage({text}) {
+function AppIntroPage() {
+  console.log(IntroPage);
     return (
     <div className="app" id="app">
       <Menu />
-      <QuizPage text={text}/>
+      <IntroPage />
       <ControlPanel />
     </div>
   );
 }
 
 
-export default AppQuizPage;
+export default AppIntroPage;

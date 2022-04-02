@@ -2,7 +2,8 @@ import React from 'react';
 import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
-const DefPage = () => {
+
+const DefPage = ({text}) => {
   let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
 
   return (

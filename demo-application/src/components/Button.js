@@ -1,14 +1,16 @@
 
-const Button = ({text}) => {
+const Button = ({id, text, onClick}) => {
     return (
         <>
-            <button style={buttonStyle} onclick="btnHandler(this.text)">{text}</button>
+            <button id={id} onClick={onClick} style={buttonStyle} onclick="btnHandler(this.text)">{text}</button>
         </>
     )
 }
 
 Button.defaultProps = {
+    id: 'btn',
     text: 'btn',
+    onClick: () => {},
 }
 
 const buttonStyle = {
