@@ -2,23 +2,26 @@ import React from 'react';
 import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
+
 const DefPage = () => {
+  let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
+
   return (
     <div className='bookContainer'>
         <div className='book' style={bookStyle}>
           <div className='defPage'>
             <div className='definitionWord'>
               <center>
-                <h1>
+                <h2>
                   Word Definition:
-                </h1>
+                </h2>
               </center> 
             </div>
 
             <div className='definition'>
               <center>
                 <h3 className='defText'>
-                  XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ
+                  <p>{tempText}</p>
                 </h3>
               </center> 
             </div>
