@@ -283,7 +283,8 @@ body {
 #introBtn {
   position: absolute;
   align-self: center;
-  padding: 10px;
+  /* padding: 10px; */
+  margin: 10px;
 }
 
 .intro {
@@ -370,9 +371,14 @@ body {
   max-width: 100%;
 }
 
-#craneImg {
+.craneImg {
   margin: 10px;
-  height: 200px;
+  height: 300px;
+}
+
+.craneImg2 {
+  margin: 10px;
+  height: 600px;
 }
 
 /* #item {
@@ -380,7 +386,7 @@ body {
 } */
 .introText {
   margin: 10px;
-  width: 700px;
+  /* width: 700px; */
   /* overflow: auto; */
 }
 
@@ -402,7 +408,9 @@ font-size: 20px;
 
 #longBtn {
   width:48%;
-  margin: 10px;
+  /* background-color: aqua; */
+  /* border-radius: 50%; */
+  /* margin: 10px; */
 }
 
 .hideControl {
