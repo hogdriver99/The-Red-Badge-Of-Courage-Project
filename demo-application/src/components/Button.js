@@ -20,7 +20,7 @@ const buttonStyle = {
     borderRadius: '10%',
     margin: '10px',
     fontFamily: "'Times New Roman', Times, serif",
-    fontSize: '20px',
+    fontSize: '18px',
     textTransform: 'uppercase',
     height: '40px',
     padding: '10px',

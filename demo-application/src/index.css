@@ -206,11 +206,14 @@ body {
 .stars {
   display: flex;
   flex-direction: row;
+  justify-content: left;
   position: absolute;
-  width: 100%;
-  align-items: center;
+  width: 300px;
+  /* align-items: center; */
   top: -40px;
-  right: 7%;
+  /* right: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* background-color: grey; */
   /* width: 70px; */
 }
 
@@ -375,7 +378,9 @@ body {
 
 #longBtn {
   width:48%;
+  margin: 10px;
 }
+
 .hideControl {
   display: flex;
   flex-direction: row;
