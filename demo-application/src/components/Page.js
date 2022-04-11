@@ -20,7 +20,8 @@ const pageStyle = {
   maxWidth: '520px',
   maxHeight: '800px',
   overflow: 'auto',
-  whiteSpace: 'pre-wrap'
+  whiteSpace: 'pre-wrap',
+  fontSize: '17px',
 }
 
 export default Page;

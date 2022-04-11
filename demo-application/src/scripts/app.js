@@ -381,13 +381,24 @@ function pullQuizPage(text) {
 let correctChoice = 0;
 
 export function getBtnVals() {
-
-    // get data from json file (def, correct word, dummy words)
-    // console.log(defenitions[text], defenitions['aback'])
+    // Get data from json file (def, correct word, dummy words)
     let defenition = defenitions[dbltext]
     console.log(dbltext);
     console.log(defenition);
+
+    // Getting random words 
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
+    let keys = Object.keys(defenitions)
+    for (var i = 0; i < 3; i++) {
+        let randChoice = Math.floor(Math.random() * keys.length)
+        console.log(keys.length, randChoice, keys[randChoice]);
+        dummyWords[i] = keys[randChoice]
+
+        // case random choice happens to be word to be guessed
+        if (keys[randChoice] === dbltext) {
+            i--
+        }
+    }
 
     // Assign correct choice
     let word = []
@@ -693,5 +704,6 @@ function backChapter() {
     //loads new page
     pageReturn();
 }
+
 
 
