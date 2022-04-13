@@ -448,9 +448,13 @@ let checkAnswer = (choice) => {
 }
 
 let quizIsOn = true
+// VARIABLE TO STORE COMPLETED QUIZES
+let quizData = []
 
 // function to stop the quiz!
-export function endQuiz() {
+export function endQuiz(answer) {
+    quizData.push(answer)
+    console.log(quizData)
     quizIsOn = false
 }
 

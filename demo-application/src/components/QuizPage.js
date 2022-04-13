@@ -28,8 +28,9 @@ const QuizPage = ({text}) => {
       //terminate after 5 stars
       //TO FIX currently needs another click to update
       if (stars >= 4) {
+        // Catch the data here
         console.log("End")
-        endQuiz()
+        endQuiz(text)
       }
       let newArray = starsArray
       newArray[stars] = true
