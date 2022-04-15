@@ -206,7 +206,7 @@ body {
 .stars {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  /* justify-content: left; */
   position: absolute;
   width: 300px;
   /* align-items: center; */

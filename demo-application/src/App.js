@@ -6,8 +6,14 @@ import ImgPage from './components/ImgPage';
 import Menu from './components/Menu';
 import { useEffect, useState } from 'react'
 import Button from './components/Button';
+import {Data} from './scripts/data'
 
 function App() {
+
+  // initialize data
+  // localStorage.setItem("data", [])
+  // localStorage.setItem("dataCount", 0)
+
   //intro page state variable
   const [introPage, setIntroPage] = useState(false);
   const introPageOnClick = () => {

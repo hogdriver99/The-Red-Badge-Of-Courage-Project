@@ -448,13 +448,15 @@ let checkAnswer = (choice) => {
 }
 
 let quizIsOn = true
-// VARIABLE TO STORE COMPLETED QUIZES
-let quizData = []
+// CLASS TO STORE COMPLETED QUIZES
+// var quizData = []
 
 // function to stop the quiz!
 export function endQuiz(answer) {
-    quizData.push(answer)
-    console.log(quizData)
+    // quizData.push(answer)
+    // console.log(quizData)
+    // data.pushWord(answer)
+    // console.log(data.getWordsCompleted())
     quizIsOn = false
 }
 

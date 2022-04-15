@@ -7,6 +7,21 @@ import goldStar from '../images/Gold-Star-Blank.png'
 import silverStar from '../images/Silver-Star-Blank.png'
 
 const QuizPage = ({text}) => {
+  // class Data {
+  //   constructor() {
+  //       this.wordsCompleted = []
+  //   }
+
+  //   pushWord(word) {
+  //       this.wordsCompleted.push(word)
+  //   }
+
+  //   getWordsCompleted() {
+  //       return this.wordsCompleted
+  //   }
+  // }
+
+  // let data = new Data();
 
   let word = getBtnVals(text)
   let tempText = "This word is not defined"
@@ -30,6 +45,23 @@ const QuizPage = ({text}) => {
       if (stars >= 4) {
         // Catch the data here
         console.log("End")
+
+        var tempData = localStorage.getItem("data")
+        console.log(typeof(tempData), tempData)
+        tempData += text
+        tempData += ", "
+        localStorage.setItem("data", tempData)
+        console.log(localStorage.getItem("data"))
+
+        var tempDataCount = localStorage.getItem("dataCount")
+        if (!tempDataCount) {
+          tempDataCount = 0
+        } else {
+          tempDataCount = parseInt(tempDataCount)
+          tempDataCount++
+        }
+        localStorage.setItem("dataCount", tempDataCount)
+        console.log(tempDataCount, typeof(tempDataCount))
         endQuiz(text)
       }
       let newArray = starsArray
@@ -64,6 +96,7 @@ const QuizPage = ({text}) => {
           <div className='defPage'>
             <div className='definitionWord'>
               {/* Displaying stars */}
+              <center>
               <div className='stars'>
                 {silverStarsArray[0] && <Icon image={silverStar} name='silverStar'/>}
                 {silverStarsArray[1] && <Icon image={silverStar} name='silverStar'/>}
@@ -78,11 +111,13 @@ const QuizPage = ({text}) => {
                 {starsArray[3] && <Icon image={goldStar} name='goldStar'/>}
                 {starsArray[4] && <Icon image={goldStar} name='goldStar'/>}
               </div>
+              </center>
+              
               <center>
                   <h1 id="defLabel"> Definition: </h1>
                   <div  className="defLabelText">
 
-                    <p>{tempText}</p>
+                    <h3>{tempText}</h3>
                   </div>
               </center>
             </div>
@@ -107,7 +142,7 @@ const QuizPage = ({text}) => {
 };
 
 const bookStyle = {
-  backgroundColor: '#949292',
+  backgroundColor: 'white',
 }
 
 
