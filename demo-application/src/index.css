@@ -206,7 +206,7 @@ body {
 .stars {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  /* justify-content: left; */
   position: absolute;
   width: 300px;
   /* align-items: center; */
@@ -390,7 +390,7 @@ body {
   /* overflow: auto; */
 }
 
-pre {
+#introP {
 font-family: 'Times New Roman', Times, serif;
 font-size: 20px;
   white-space: pre-wrap;
@@ -425,6 +425,7 @@ font-size: 20px;
   bottom: 0px;
   background-color: #A6F0C6;
 }
+
 
 /* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {
