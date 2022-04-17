@@ -38,7 +38,7 @@ const DefPage = () => {
 };
 
 const bookStyle = {
-  backgroundColor: '#949292',
+  backgroundColor: 'white',
 }
 
 export default DefPage;

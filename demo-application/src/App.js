@@ -6,8 +6,14 @@ import ImgPage from './components/ImgPage';
 import Menu from './components/Menu';
 import { useEffect, useState } from 'react'
 import Button from './components/Button';
+import {Data} from './scripts/data'
 
 function App() {
+
+  // initialize data
+  // localStorage.setItem("data", [])
+  // localStorage.setItem("dataCount", 0)
+
   //intro page state variable
   const [introPage, setIntroPage] = useState(false);
   const introPageOnClick = () => {
@@ -39,7 +45,7 @@ function App() {
         {imgPage && <Button id="longBtn" text='Back to Intro' onClick={() => imgPageOnClick()}/>}
 
         {/* Right Button */}
-        <Button id="longBtn" text='Proceed to the Book' onClick={() => introPageOnClick()}/>
+        <Button id="longBtn" text='Read Book' onClick={() => introPageOnClick()}/>
       </div> }
       
     </div>

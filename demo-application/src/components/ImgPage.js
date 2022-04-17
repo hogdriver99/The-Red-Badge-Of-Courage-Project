@@ -1,6 +1,3 @@
-// import one from "../civilWarImages/1.png"
-import crane2 from "../civilWarImages/crane2.jpg"
-import crane from "../civilWarImages/crane.jpg"
 import img1 from '../civilWarImages/1.jpg';
 import img2 from '../civilWarImages/2.jpg';
 import img3 from '../civilWarImages/3.png';
@@ -46,10 +43,43 @@ const ImgPage = () => {
             <div className="intro" id="top">
                 <h2 id="item">Images</h2>
                 <div className="introImg" id="item">
-                    <img id='imgItem' src={crane2}/>
-                </div>
-                <div className="introImg" id="item">
-                    <img id='imgItem' src={crane}/>
+                    <img src={img1} />
+                    <img src={img2} />
+                    <img src={img3} />
+                    <img src={img4} />
+                    <img src={img5} />
+                    <img src={img6} /> 
+                    <img src={img7} />
+                    <img src={img8} />
+                    <img src={img9} />
+                    <img src={img10} />
+                    <img src={img11} />
+                    <img src={img12} />
+                    <img src={img13} />
+                    <img src={img14} />
+                    <img src={img15} />
+                    <img src={img16} />
+                    <img src={img17} />
+                    <img src={img18} />
+                    <img src={img19} />
+                    <img src={img20} />
+                    <img src={img21} />
+                    <img src={img22} />
+                    <img src={img23} />
+                    <img src={img24} />
+                    <img src={img25} />
+                    <img src={img26} />
+                    <img src={img27} />
+                    <img src={img28} />
+                    <img src={img29} />
+                    <img src={img30} />
+                    <img src={img31} />
+                    <img src={img32} />
+                    <img src={img33} />
+                    <img src={img34} />
+                    <img src={img35} />
+                    <img src={img36} />
+                    <img src={img37} />
                 </div>
             </div>
         </div>
