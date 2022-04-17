@@ -8,6 +8,7 @@ const Book = () => {
             <Page pageSide='right'/>
             <Page pageSide='left'/>
         </div>
+        <span class="popup-tag"></span>
     </div>
   )
 };

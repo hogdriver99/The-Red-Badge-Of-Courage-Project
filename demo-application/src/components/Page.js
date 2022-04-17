@@ -3,7 +3,7 @@ import React from 'react';
 const Page = ({pageSide}) => {
   return (
       <div className={contentName(pageSide)} style={pageStyle}>
-          <p className={pageName(pageSide)}></p>
+          <p className={pageName(pageSide)}><span class="popup-tag"></span></p>
       </div>
   )
 };
