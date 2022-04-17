@@ -3,7 +3,7 @@ import Button from './Button'
 import { btnHandler } from '../scripts/app';
 
 
-const DefPage = ({text}) => {
+const DefPage = () => {
   let tempText = "XXXXXXXXXXXXYYYYYYYYYYYYYZZZZZZZZZZZZZZZZ"
 
   return (
@@ -25,7 +25,6 @@ const DefPage = ({text}) => {
                 </h3>
               </center> 
             </div>
-            
               <div className='quizButton'>
                   <button onClick={function (e) {btnHandler(document.getElementById('quizButton').textContent)}} className='button' id='quizButton'>Quiz</button>
               </div>
