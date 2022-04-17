@@ -45,7 +45,7 @@ function App() {
         {imgPage && <Button id="longBtn" text='Back to Intro' onClick={() => imgPageOnClick()}/>}
 
         {/* Right Button */}
-        <Button id="longBtn" text='Proceed to the Book' onClick={() => introPageOnClick()}/>
+        <Button id="longBtn" text='Read Book' onClick={() => introPageOnClick()}/>
       </div> }
       
     </div>
