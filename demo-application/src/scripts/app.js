@@ -466,7 +466,9 @@ export function btnHandler(btnVal) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
         // TO DO: check if defenition exists
-        if (0) {
+        let defExits = defenitions[dbltext]
+
+        if (!defExits) {
             backToBook()
         } else {
             pullQuizPage(dbltext);
