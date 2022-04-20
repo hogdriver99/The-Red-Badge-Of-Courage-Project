@@ -452,16 +452,17 @@ let quizIsOn = true
 // var quizData = []
 
 // function to stop the quiz!
-export function endQuiz(answer) {
+export function endQuiz() {
     // quizData.push(answer)
     // console.log(quizData)
     // data.pushWord(answer)
     // console.log(data.getWordsCompleted())
+    console.log("Quiz Ended")
     quizIsOn = false
 }
 
 //button handler needed for other pages, called from HTML
-export function btnHandler(btnVal, text) {
+export function btnHandler(btnVal) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
         pullQuizPage(dbltext);

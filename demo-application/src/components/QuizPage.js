@@ -36,6 +36,30 @@ const QuizPage = ({text}) => {
   const [silverStars, setSilverStars] = useState(0);
   const [silverStarsArray, setSilverStarsArray] = useState([false,false,false,false,false]);
 
+  let exitQuiz = () => {
+    // Catch the data here
+    console.log("End")
+
+    var tempData = localStorage.getItem("data")
+    console.log(typeof(tempData), tempData)
+    tempData += text
+    tempData += ", "
+    localStorage.setItem("data", tempData)
+    console.log(localStorage.getItem("data"))
+
+    var tempDataCount = localStorage.getItem("dataCount")
+    if (!tempDataCount) {
+      tempDataCount = 0
+    } else {
+      tempDataCount = parseInt(tempDataCount)
+      tempDataCount++
+    }
+    localStorage.setItem("dataCount", tempDataCount)
+    console.log(tempDataCount, typeof(tempDataCount))
+    endQuiz()
+    btnHandler("wordA")
+  }
+
   const updateStarsOnClick = (answer) => {
     
     // correct
@@ -43,26 +67,7 @@ const QuizPage = ({text}) => {
       //terminate after 5 stars
       //TO FIX currently needs another click to update
       if (stars >= 4) {
-        // Catch the data here
-        console.log("End")
-
-        var tempData = localStorage.getItem("data")
-        console.log(typeof(tempData), tempData)
-        tempData += text
-        tempData += ", "
-        localStorage.setItem("data", tempData)
-        console.log(localStorage.getItem("data"))
-
-        var tempDataCount = localStorage.getItem("dataCount")
-        if (!tempDataCount) {
-          tempDataCount = 0
-        } else {
-          tempDataCount = parseInt(tempDataCount)
-          tempDataCount++
-        }
-        localStorage.setItem("dataCount", tempDataCount)
-        console.log(tempDataCount, typeof(tempDataCount))
-        endQuiz(text)
+        exitQuiz()
       }
       let newArray = starsArray
       newArray[stars] = true
@@ -134,6 +139,10 @@ const QuizPage = ({text}) => {
                 <div className='quizButton4'>
                     <button onClick={function (e) {onClickFunc('wordD')}} className='button' id='wordD'>{word[3]}</button>
                 </div>
+            </div>
+
+            <div>
+              <Button text="Exit" onClick={function (e) {exitQuiz()}}/>
             </div>
           </div>
         </div>
