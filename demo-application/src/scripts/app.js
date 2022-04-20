@@ -470,9 +470,11 @@ export function btnHandler(btnVal) {
 
         if (!defExits) {
             backToBook()
+            window.location.reload();
         } else {
             pullQuizPage(dbltext);
         }
+
     } else if (btnVal == "Return to book") {
         backToBook();
         window.location.reload();
