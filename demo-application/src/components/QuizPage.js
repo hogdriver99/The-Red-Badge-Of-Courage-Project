@@ -65,7 +65,6 @@ const QuizPage = ({text}) => {
     // correct
     if (answer) {
       //terminate after 5 stars
-      //TO FIX currently needs another click to update
       if (stars >= 4) {
         exitQuiz()
       }

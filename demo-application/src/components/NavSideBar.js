@@ -11,7 +11,7 @@ const NavSideBar = ({mobile}) => {
                 {mobile && <Icon image={home} name='home' onClick={null}/>}
                 {mobile && <Button text='Log In'/>}
                 {/* <h1>Item</h1> */}
-                <Button text="Quiz Results" onClick={quizResults()}/>
+                <Button text="Quiz Results" onClick={function (e) {quizResults()}}/>
                 {/* Option to hide lower buttons? */}
             </div>
         </div>
