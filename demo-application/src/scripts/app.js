@@ -465,7 +465,12 @@ export function endQuiz() {
 export function btnHandler(btnVal) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
-        pullQuizPage(dbltext);
+        // TO DO: check if defenition exists
+        if (0) {
+            backToBook()
+        } else {
+            pullQuizPage(dbltext);
+        }
     } else if (btnVal == "Return to book") {
         backToBook();
         window.location.reload();
