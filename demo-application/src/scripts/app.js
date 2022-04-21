@@ -465,15 +465,12 @@ let correctChoice = 0;
 export function getBtnVals() {
     // Get data from json file (def, correct word, dummy words)
     let defenition = defenitions[dbltext]
-    console.log(dbltext);
-    console.log(defenition);
 
     // Getting random words
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
     let keys = Object.keys(defenitions)
     for (var i = 0; i < 3; i++) {
         let randChoice = Math.floor(Math.random() * keys.length)
-        console.log(keys.length, randChoice, keys[randChoice]);
         dummyWords[i] = keys[randChoice]
 
         // case random choice happens to be word to be guessed
@@ -487,8 +484,6 @@ export function getBtnVals() {
     correctChoice = Math.floor(Math.random()*4)
     word[correctChoice] = dbltext
 
-    console.log(correctChoice)
-
     // Assign dummy words
     for (let i = 0; i < 4; i++) {
         if (i != correctChoice) {
@@ -496,7 +491,6 @@ export function getBtnVals() {
         }
     }
     word.push(defenition)
-    console.log(word, dbltext)
     return word
 }
 
@@ -530,23 +524,27 @@ let checkAnswer = (choice) => {
 }
 
 let quizIsOn = true
-// CLASS TO STORE COMPLETED QUIZES
-// var quizData = []
 
 // function to stop the quiz!
-export function endQuiz(answer) {
-    // quizData.push(answer)
-    // console.log(quizData)
-    // data.pushWord(answer)
-    // console.log(data.getWordsCompleted())
+export function endQuiz() {
+    console.log("Quiz Ended")
     quizIsOn = false
 }
 
-//button handler needed for other pages, called from HTML
-export function btnHandler(btnVal, text) {
+// button handler needed for other pages, called from HTML
+export function btnHandler(btnVal) {
     console.log(btnVal);
     if (btnVal == "Quiz") {
-        pullQuizPage(dbltext);
+        // check if defenition exists, if not - no quiz
+        let defExits = defenitions[dbltext]
+
+        if (!defExits) {
+            backToBook()
+            window.location.reload();
+        } else {
+            pullQuizPage(dbltext);
+        }
+        
     } else if (btnVal == "Return to book") {
         backToBook();
         window.location.reload();

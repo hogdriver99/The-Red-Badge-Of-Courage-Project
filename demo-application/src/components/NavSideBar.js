@@ -10,16 +10,13 @@ const NavSideBar = ({mobile}) => {
             <div className='navContainer'>
                 {mobile && <Icon image={home} name='home' onClick={null}/>}
                 {mobile && <Button text='Log In'/>}
-                {/* <h1>Item</h1> */}
-                <Button text="Quiz Results" onClick={quizResults()}/>
-                {/* Option to hide lower buttons? */}
+                <Button text="Quiz Results" onClick={function (e) {quizResults()}}/>
             </div>
         </div>
         )
 };
 
 function quizResults() {
-    window.confirm(localStorage.getItem("data"))
-    // alert()
+    window.confirm("Total Words Quizzed: " + localStorage.getItem("dataCount") + "\n" + localStorage.getItem("data"))
 }
 export default NavSideBar;

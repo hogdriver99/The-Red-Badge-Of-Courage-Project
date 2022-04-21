@@ -7,22 +7,6 @@ import goldStar from '../images/Gold-Star-Blank.png'
 import silverStar from '../images/Silver-Star-Blank.png'
 
 const QuizPage = ({text}) => {
-  // class Data {
-  //   constructor() {
-  //       this.wordsCompleted = []
-  //   }
-
-  //   pushWord(word) {
-  //       this.wordsCompleted.push(word)
-  //   }
-
-  //   getWordsCompleted() {
-  //       return this.wordsCompleted
-  //   }
-  // }
-
-  // let data = new Data();
-
   let word = getBtnVals(text)
   let tempText = "This word is not defined"
   let displayText = word.pop()
@@ -30,40 +14,44 @@ const QuizPage = ({text}) => {
     tempText = displayText
   }
 
-  // state var to keep stack of stars
+  // state vars to keep stack of stars
   const [stars, setStars] = useState(0);
   const [starsArray, setStarsArray] = useState([false,false,false,false,false]);
   const [silverStars, setSilverStars] = useState(0);
   const [silverStarsArray, setSilverStarsArray] = useState([false,false,false,false,false]);
 
+  let exitQuiz = () => {
+    console.log("End")
+
+    // append new quiz data
+    var tempData = localStorage.getItem("data")
+    tempData += text
+    tempData += ": "
+    tempData += silverStars
+    tempData += "/5 silver; "
+    tempData += stars
+    tempData += "/5 gold;\n"
+    localStorage.setItem("data", tempData)
+
+    // update data count
+    var tempDataCount = localStorage.getItem("dataCount")
+    if (!tempDataCount) {
+      tempDataCount = 0
+    } else {
+      tempDataCount = parseInt(tempDataCount)
+      tempDataCount++
+    }
+    localStorage.setItem("dataCount", tempDataCount)
+    
+    // exit
+    endQuiz()
+    btnHandler("wordA")
+  }
+
   const updateStarsOnClick = (answer) => {
     
     // correct
     if (answer) {
-      //terminate after 5 stars
-      //TO FIX currently needs another click to update
-      if (stars >= 4) {
-        // Catch the data here
-        console.log("End")
-
-        var tempData = localStorage.getItem("data")
-        console.log(typeof(tempData), tempData)
-        tempData += text
-        tempData += ", "
-        localStorage.setItem("data", tempData)
-        console.log(localStorage.getItem("data"))
-
-        var tempDataCount = localStorage.getItem("dataCount")
-        if (!tempDataCount) {
-          tempDataCount = 0
-        } else {
-          tempDataCount = parseInt(tempDataCount)
-          tempDataCount++
-        }
-        localStorage.setItem("dataCount", tempDataCount)
-        console.log(tempDataCount, typeof(tempDataCount))
-        endQuiz(text)
-      }
       let newArray = starsArray
       newArray[stars] = true
       setStarsArray(newArray)
@@ -71,6 +59,10 @@ const QuizPage = ({text}) => {
       setStars(stars+1)
       console.log(stars)
 
+      //terminate after 5 stars
+      if (stars >= 4) {
+        exitQuiz()
+      }
     } else {
       // Always store highest silver score
       if (stars > silverStars) {
@@ -86,7 +78,6 @@ const QuizPage = ({text}) => {
 
   let onClickFunc = (word) => {
     let checkAnswer = btnHandler(document.getElementById(word).id)
-    console.log(checkAnswer)
     updateStarsOnClick(checkAnswer)
   }
 
@@ -134,6 +125,10 @@ const QuizPage = ({text}) => {
                 <div className='quizButton4'>
                     <button onClick={function (e) {onClickFunc('wordD')}} className='button' id='wordD'>{word[3]}</button>
                 </div>
+            </div>
+
+            <div>
+              <Button text="Exit" onClick={function (e) {exitQuiz()}}/>
             </div>
           </div>
         </div>
