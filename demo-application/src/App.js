@@ -6,11 +6,9 @@ import ImgPage from './components/ImgPage';
 import Menu from './components/Menu';
 import { useEffect, useState } from 'react'
 import Button from './components/Button';
-// import {Data} from './scripts/data'
 
 function App() {
-
-  // reinitialize data (uncomment to start over storing data)
+  // reinitialize data (uncomment 2 lines below to start over storing data)
   // localStorage.setItem("data", [])
   // localStorage.setItem("dataCount", 0)
 
@@ -28,19 +26,19 @@ function App() {
     console.log(imgPage)
   }
   
-   // images page state variable
-   const [data, setData] = useState([]);
-   const addDataOnClick = (newData) => {
-     let updateData = data
-     updateData.push(newData)
-     setData(updateData)
-     console.log("Data Updated")
-   }
+  // data state variable for the future
+  //  const [data, setData] = useState([]);
+  //  const addDataOnClick = (newData) => {
+  //    let updateData = data
+  //    updateData.push(newData)
+  //    setData(updateData)
+  //    console.log("Data Updated")
+  //  }
 
   return (
     <div className="app" id="app">
       <Menu introPageOnClick={introPageOnClick}/>
-      {/* Showing intro/Images pages*/}
+      {/* Showing Intro/Images pages*/}
       {introPage && <IntroPage />}
       {imgPage && <ImgPage />}
 

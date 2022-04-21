@@ -34,7 +34,6 @@ body {
   border-color:#A6F0C6;
   box-shadow: 0 0 10px #949292;
   z-index: 3;
-  /* border */
 }
 
 .navContainer {
@@ -52,7 +51,6 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 87%;
-  /* height: 100px; */
   align-self: center;
   position: absolute;
   top: 10px;
@@ -77,8 +75,6 @@ body {
   align-self: center;
   position: absolute;
   bottom: 0px;
-  /* background-color: #A6F0C6; */
-  /* z-index: 2; */
 }
 
 /* BOOK */
@@ -88,25 +84,18 @@ body {
   position: absolute;
   align-self: center;
   top: 60px;
-  /* transform: translate(-50%, -50%); */
   overflow: hidden;
   padding: 20px;
   z-index: 1;
 }
 
 .book {
-  /* display: flex;
-  flex-direction: row; */
-  /* align-self: center; */
-  /* height: 600px; */
-  /* width: 800px; */
   position: relative;
   top: 0px;
   width:100%;
   height:100%;
   background-color: white;
   box-shadow: 0 0 10px #949292;
-  /* visibility: hidden; */
 }
 
 /* Mobile First - one page initially*/
@@ -115,19 +104,15 @@ body {
   top: 20px;
   right: 5%;
   width: 90%;
-  /* height: 80%; */
   bottom: 20px;
 }
 
 .content-right {
-  /* background-color: #A6F0C6; */
   position: absolute;
   top: 20px;
   right: 5%;
-  /* left:10px; */
   width: 44%;
   bottom: 20px;
-  /* height: 80%; */
   visibility: hidden;
 }
 
@@ -139,7 +124,6 @@ body {
   margin: 10px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 26px;
-  /* text-transform: uppercase; */
   height: 40px;
   padding: 10px;
   cursor: pointer;
@@ -166,14 +150,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: white;
-  /* box-shadow: 0 0 10px #949292;
-  padding: 20px; */
 }
-
-/* TO FIX */
-/* .defText {
-  overflow: hidden;
-} */
 
 .definition {
   position: absolute;
@@ -202,19 +179,12 @@ body {
 }
 
 /* QUIZ PAGE */
-
 .stars {
   display: flex;
   flex-direction: row;
-  /* justify-content: left; */
   position: absolute;
   width: 300px;
-  /* align-items: center; */
   top: -40px;
-  /* right: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* background-color: grey; */
-  /* width: 70px; */
 }
 
 #defLabel {
@@ -222,7 +192,6 @@ body {
   position: absolute;
   top: 20px;
   width: 100%;
-  /* right: 20%; */
 }
 
 .defLabelText {
@@ -274,7 +243,6 @@ body {
   position: absolute;
   align-self: center;
   top: 60px;
-  /* transform: translate(-50%, -50%); */
   overflow: hidden;
   padding: 20px;
   z-index: 2;
@@ -283,38 +251,26 @@ body {
 #introBtn {
   position: absolute;
   align-self: center;
-  /* padding: 10px; */
   margin: 10px;
 }
 
 .intro {
   display: flex;
   flex-direction: column;
-  /* flex-wrap: nowrap; */
   justify-content: flex-start;
   align-items: center;
-  /* padding: 20px; */
 
   position: absolute;
   top: 20px;
   align-self: center;
   right: 8%;
   width: 84%;
-  /* height: 80%; */
   bottom: 20px;
-  /* background-color: #A6F0C6; */
   overflow: scroll;
-  /* position: absolute; */
 }
 
 /* In intro Page */
 .craneImg {
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  padding: 20px;
-  justify-content: space-around; */
   height: 270px;
   width: 100%;
   display: flex;
@@ -324,36 +280,12 @@ body {
 
 /* Images Page */
 .introImg {
-
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
   justify-content: flex-start;
   align-items: center;
   padding: 20px;
   width: 100%;
-  /* height: 270px; */
-  
-  /* justify-content: space-around; */
-  /* overflow: scroll; */
-  /* position: absolute;
-  top: 20px;
-  align-self: center; */
-  /* right: 8%; */
-  /* max-width: 84%; */
-
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-
-  position: absolute;
-  top: 20px;
-  align-self: center;
-  right: 8%;
-  width: 84%;
-  overflow: scroll; */
 }
 
 .introImg > img {
@@ -381,13 +313,8 @@ body {
   height: 600px;
 }
 
-/* #item {
-  margin: 10px;
-} */
 .introText {
   margin: 10px;
-  /* width: 700px; */
-  /* overflow: auto; */
 }
 
 #introP {
@@ -397,20 +324,14 @@ font-size: 20px;
   overflow-wrap: break-word;
 }
 
-/* TO FIX */
 #imgItem {
   margin: 20px;
   max-height: 600px;
   max-width: 300px;
-  /* min-height: 400px; */
-  /* max-width: 800px; */
 }
 
 #longBtn {
   width:48%;
-  /* background-color: aqua; */
-  /* border-radius: 50%; */
-  /* margin: 10px; */
 }
 
 .hideControl {
@@ -420,7 +341,6 @@ font-size: 20px;
   justify-content: space-around;
   align-items: center;
   width: 90%;
-  /* align-self: center; */
   position: absolute;
   bottom: 0px;
   background-color: #A6F0C6;
@@ -434,7 +354,6 @@ font-size: 20px;
     top: 20px;
     left: 5%;
     width: 44%;
-    /* height: 80%; */
     bottom: 20px;
   }
 

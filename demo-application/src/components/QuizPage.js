@@ -7,22 +7,6 @@ import goldStar from '../images/Gold-Star-Blank.png'
 import silverStar from '../images/Silver-Star-Blank.png'
 
 const QuizPage = ({text}) => {
-  // class Data {
-  //   constructor() {
-  //       this.wordsCompleted = []
-  //   }
-
-  //   pushWord(word) {
-  //       this.wordsCompleted.push(word)
-  //   }
-
-  //   getWordsCompleted() {
-  //       return this.wordsCompleted
-  //   }
-  // }
-
-  // let data = new Data();
-
   let word = getBtnVals(text)
   let tempText = "This word is not defined"
   let displayText = word.pop()
@@ -30,27 +14,27 @@ const QuizPage = ({text}) => {
     tempText = displayText
   }
 
-  // state var to keep stack of stars
+  // state vars to keep stack of stars
   const [stars, setStars] = useState(0);
   const [starsArray, setStarsArray] = useState([false,false,false,false,false]);
   const [silverStars, setSilverStars] = useState(0);
   const [silverStarsArray, setSilverStarsArray] = useState([false,false,false,false,false]);
 
   let exitQuiz = () => {
-    // Catch the data here
     console.log("End")
 
+    // append new quiz data
     var tempData = localStorage.getItem("data")
-    console.log(typeof(tempData), tempData)
     tempData += text
     tempData += ": "
     tempData += silverStars
     tempData += "/5 silver; "
-    tempData += stars
+    let startsNum = stars + 1
+    tempData += startsNum
     tempData += "/5 gold;\n"
     localStorage.setItem("data", tempData)
-    console.log(localStorage.getItem("data"))
 
+    // update data count
     var tempDataCount = localStorage.getItem("dataCount")
     if (!tempDataCount) {
       tempDataCount = 0
@@ -59,7 +43,8 @@ const QuizPage = ({text}) => {
       tempDataCount++
     }
     localStorage.setItem("dataCount", tempDataCount)
-    console.log(tempDataCount, typeof(tempDataCount))
+    
+    // exit
     endQuiz()
     btnHandler("wordA")
   }
@@ -68,10 +53,6 @@ const QuizPage = ({text}) => {
     
     // correct
     if (answer) {
-      //terminate after 5 stars
-      if (stars >= 4) {
-        exitQuiz()
-      }
       let newArray = starsArray
       newArray[stars] = true
       setStarsArray(newArray)
@@ -79,6 +60,10 @@ const QuizPage = ({text}) => {
       setStars(stars+1)
       console.log(stars)
 
+      //terminate after 5 stars
+      if (stars >= 4) {
+        exitQuiz()
+      }
     } else {
       // Always store highest silver score
       if (stars > silverStars) {
@@ -94,7 +79,6 @@ const QuizPage = ({text}) => {
 
   let onClickFunc = (word) => {
     let checkAnswer = btnHandler(document.getElementById(word).id)
-    console.log(checkAnswer)
     updateStarsOnClick(checkAnswer)
   }
 

@@ -50,7 +50,7 @@ const Menu = ({introPageOnClick}) => {
                     <Icon image={crane} name='crane' onClick={() => introPageOnClick()}/>
                 </div>
 
-                {/* Show only when big screen */}
+                {/* Show only on big screen */}
                 {!showMobileMenu && <h1>The Red Badge of Courage</h1>}
 
                 <Button text='Log In'/>
