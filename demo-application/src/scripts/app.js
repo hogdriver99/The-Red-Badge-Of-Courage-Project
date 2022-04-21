@@ -2,10 +2,11 @@ import $ from 'jquery';
 import raw from 'raw.macro';
 import AppDefPage from '../AppDefPage';
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, {useState} from 'react';
 import App from '../App';
 import AppQuizPage from '../AppQuizPage';
-import defenitions from './worddefs.json'
+import defenitions from './worddefs.json';
+import PopUp from '../PopUp.css';
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -228,12 +229,23 @@ function pageSet(startidx, endidx, source) {
     return outtext;
 }
 
+
+let audio = '';
+
+
+
+async function audioFile(word) {
+
+
+}
+
 // VARIABLE TO PASS IN CURRENT WORD TO DEF AND QUIZ SCREENS
 let dbltext = ''
 
 //highlights words on one click
 $(window).on("load", function() {
 
+    //makes cursor look clickable
     var point = $('p');
     point.css({ cursor: 'pointer' });
 
@@ -290,16 +302,38 @@ $(window).on("load", function() {
             range.setStart(node, range.startOffset + 1);
         }
 
+        //final text to be highlighted
         var text = $.trim(selection.toString());
 
+        //matches highlighted word to definition list
         dbltext = text.replace(/[']/g, "");
         dbltext.replace(/\s+/g," ")
         dbltext = dbltext.toLowerCase();
 
+        //plays audio file of highlighted word
+        //pulls url for audio file
+        let sec = "audio";
+        let fold = "words";
+        let wrd = dbltext;
+        let prefix = dbltext.substring(0,1);
+        let url = "https://brainy-literacy-assets.s3.amazonaws.com/" + sec + "/" + fold + "/" + prefix + "/" + dbltext + ".mp3";
 
+        if(audio == '' || audio.ended) {
+            //declares and builds audio files
+            audio = new Audio(url);
+
+            //plays the audio file and makes popup if there is no aduio file
+            audio.play().catch(function() {
+                $("span.popup-tag").css("display","flex");
+                $("span.popup-tag").text("Sorry, this word doesn't have audio");
+            });
+        }
+
+        //unhighlights the word after 2.5 seconds
         window.setTimeout(() => {
+            $("span.popup-tag").css("display","none");
             window.getSelection().empty();
-        }, 5000);
+        }, 3500);
     });
 
     point.dblclick(function(f) {
@@ -327,6 +361,8 @@ function pullDefPage(word) {
 }
 
 function findDef(word) {
+
+    //pulls definition list
     const jsonData = require('../scripts/worddefs.json');
     console.log(jsonData);
 
@@ -335,11 +371,14 @@ function findDef(word) {
     var words = [];
     var def;
 
+    //sets up array of array of words with definition
     words = Object.entries(result);
     console.log(words);
 
     console.log(word);
 
+    //finds the word in the definition list and pulls out its definition
+    //if not found, "not defined" is printed
     var def = words.find(key => key[0] == word);
     if (def != null) {
         def = def[1];
@@ -350,15 +389,58 @@ function findDef(word) {
     }
 }
 
+function findAltWrd(word) {
+    //pulls derivative word list
+    const jsonData = require('../scripts/wordders.json');
+    console.log(jsonData);
+
+    var result = jsonData;
+
+    var words = [];
+    var alt;
+
+    //sets up array of array of words and derivatives
+    words = Object.entries(result);
+    console.log(words);
+
+    console.log(word);
+
+    //finds the word in the  list and pulls out its derivatives
+    //if not found, "no defined" is printed
+    alt = words.find(key => key[0] == word);
+    if (alt != null) {
+        alt = alt[1];
+        console.log(alt)
+        return alt;
+    } else {
+        return [word];
+    }
+}
+
 
 function defPageReturn(word) {
-    var def = findDef(word);
+    var alt = []
+    alt = findAltWrd(word);
+    var root = alt[0];
+    alt.splice(0, 1);
+    let deriv = "";
+    alt.forEach((variation) => {
+        deriv = deriv + variation + ", ";
+    })
+    deriv = deriv.substring(0, deriv.length - 2);
+    if(deriv === "") {
+        deriv = "no derivatives";
+    }
+    var def = '<br>' + '<br>' + '<br>' + findDef(word) + '<br>' + '<br>' + "Root: " + root + '<br>' + '<br>' + "Derivate words: " + deriv;
     let title = document.querySelector("h2");
     title.innerHTML =  word + "";
-    title.style.fontSize = "32px";
+    title.style.fontSize = "45px";
 
     let definition = document.querySelector("h3");
+    definition.style.fontSize = "32px";
     definition.innerHTML =  def;
+    definition.style.whiteSpace = "pre-wrap";
+    definition.style.inlineSize = "1000px";
 }
 
 
@@ -384,7 +466,7 @@ export function getBtnVals() {
     // Get data from json file (def, correct word, dummy words)
     let defenition = defenitions[dbltext]
 
-    // Getting random words 
+    // Getting random words
     let dummyWords = ["Dummy1", "Dummy2", "Dummy3"]
     let keys = Object.keys(defenitions)
     for (var i = 0; i < 3; i++) {

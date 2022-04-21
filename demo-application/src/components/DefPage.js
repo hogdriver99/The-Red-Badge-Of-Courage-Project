@@ -24,7 +24,6 @@ const DefPage = () => {
                 </h3>
               </center> 
             </div>
-            
               <div className='quizButton'>
                   <button onClick={function (e) {btnHandler(document.getElementById('quizButton').textContent)}} className='button' id='quizButton'>Quiz</button>
               </div>

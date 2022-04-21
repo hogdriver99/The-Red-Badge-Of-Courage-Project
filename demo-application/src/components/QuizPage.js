@@ -29,8 +29,7 @@ const QuizPage = ({text}) => {
     tempData += ": "
     tempData += silverStars
     tempData += "/5 silver; "
-    let startsNum = stars + 1
-    tempData += startsNum
+    tempData += stars
     tempData += "/5 gold;\n"
     localStorage.setItem("data", tempData)
 
