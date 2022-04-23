@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import App from '../App';
 import AppQuizPage from '../AppQuizPage';
 import defenitions from './worddefs.json';
-import PopUp from '../PopUp.css';
+import popup from '../PopUp.css';
 
 var DOMstrings = {
     pageNumber: '.page-number',
@@ -232,9 +232,29 @@ function pageSet(startidx, endidx, source) {
 
 let audio = '';
 
-
-
+//plays audio file of highlighted word
 async function audioFile(word) {
+    //pulls url for audio file
+    let sec = "audio";
+    let fold = "words";
+    let wrd = word;
+    let prefix = word.substring(0,1);
+    let url = "https://brainy-literacy-assets.s3.amazonaws.com/" + sec + "/" + fold + "/" + prefix + "/" + word + ".mp3";
+
+    //Needs to check for '' for first audio call or for unaccessed audio
+    //All proceeding calls need to wait for the audio to end
+    if(audio === '' || audio.ended) {
+        //declares and builds audio file
+        audio = new Audio(url);
+
+        //plays the audio file
+        //If it doesn't exist, it changes the audio var to '' to allow future calls
+        audio.play().catch(function() {
+            $("span.popup-tag").css("display","flex");
+            $("span.popup-tag").text("Sorry, this word doesn't have audio");
+            audio = '';
+        });
+    }
 
 
 }
@@ -258,7 +278,7 @@ $(window).on("load", function() {
         var range = selection.getRangeAt(0);
         var node = selection.anchorNode;
 
-        //sets start offset of word and catches in there is a -- before the selected character
+        //sets start offset of word and catches if there is a -- before the selected character
         while(range.toString().indexOf(' ') != 0) {
             if(range.toString().charAt(1) != 0) {
                 if(/^[-]*$/.test(range.toString().charAt(0)) &&
@@ -310,34 +330,16 @@ $(window).on("load", function() {
         dbltext.replace(/\s+/g," ")
         dbltext = dbltext.toLowerCase();
 
-        //plays audio file of highlighted word
-        //pulls url for audio file
-        let sec = "audio";
-        let fold = "words";
-        let wrd = dbltext;
-        let prefix = dbltext.substring(0,1);
-        let url = "https://brainy-literacy-assets.s3.amazonaws.com/" + sec + "/" + fold + "/" + prefix + "/" + dbltext + ".mp3";
-
-        if(audio == '' || audio.ended) {
-            //declares and builds audio files
-            audio = new Audio(url);
-
-            //plays the audio file and makes popup if there is no aduio file
-            audio.play().catch(function() {
-                $("span.popup-tag").css("display","flex");
-                $("span.popup-tag").text("Sorry, this word doesn't have audio");
-            });
-        }
+        audioFile(dbltext);
 
         //unhighlights the word after 2.5 seconds
         window.setTimeout(() => {
-            $("span.popup-tag").css("display","none");
             window.getSelection().empty();
+            $("span.popup-tag").css("display","none");
         }, 3500);
     });
 
     point.dblclick(function(f) {
-        console.log("Trying to pull def page");
         pullDefPage(dbltext);
     });
 
@@ -360,11 +362,11 @@ function pullDefPage(word) {
     defPageReturn(word);
 }
 
+//finds definition of selected word
 function findDef(word) {
 
     //pulls definition list
     const jsonData = require('../scripts/worddefs.json');
-    console.log(jsonData);
 
     var result = jsonData;
 
@@ -373,27 +375,22 @@ function findDef(word) {
 
     //sets up array of array of words with definition
     words = Object.entries(result);
-    console.log(words);
-
-    console.log(word);
 
     //finds the word in the definition list and pulls out its definition
     //if not found, "not defined" is printed
     var def = words.find(key => key[0] == word);
     if (def != null) {
         def = def[1];
-        console.log(def)
         return def;
     } else {
         return "not defined"
     }
 }
 
+//finds list of derivative words
 function findAltWrd(word) {
     //pulls derivative word list
     const jsonData = require('../scripts/wordders.json');
-    console.log(jsonData);
-
     var result = jsonData;
 
     var words = [];
@@ -401,46 +398,48 @@ function findAltWrd(word) {
 
     //sets up array of array of words and derivatives
     words = Object.entries(result);
-    console.log(words);
 
-    console.log(word);
-
-    //finds the word in the  list and pulls out its derivatives
-    //if not found, "no defined" is printed
+    //finds the word in the list and pulls out its derivatives
     alt = words.find(key => key[0] == word);
     if (alt != null) {
         alt = alt[1];
-        console.log(alt)
         return alt;
     } else {
         return [word];
     }
 }
 
-
+//sets up definition page content
 function defPageReturn(word) {
     var alt = []
     alt = findAltWrd(word);
+
+    //pulls out root word from derivative word
     var root = alt[0];
     alt.splice(0, 1);
     let deriv = "";
+
+    //sets up words into a list with commas
     alt.forEach((variation) => {
         deriv = deriv + variation + ", ";
     })
     deriv = deriv.substring(0, deriv.length - 2);
     if(deriv === "") {
-        deriv = "no derivatives";
+        deriv = "";
     }
-    var def = '<br>' + '<br>' + '<br>' + findDef(word) + '<br>' + '<br>' + "Root: " + root + '<br>' + '<br>' + "Derivate words: " + deriv;
+
+    //sets definition string and derivative string
+    var def = '<br>' + '<br>' + '<br>' + findDef(word) + '<br>' + '<br>' +  deriv;
+
+    //sets title content on definition screen
     let title = document.querySelector("h2");
-    title.innerHTML =  word + "";
+    title.innerHTML =  root + "";
     title.style.fontSize = "45px";
 
+    //sets definition content on definition screen
     let definition = document.querySelector("h3");
-    definition.style.fontSize = "32px";
+    definition.style.fontSize = "24px";
     definition.innerHTML =  def;
-    definition.style.whiteSpace = "pre-wrap";
-    definition.style.inlineSize = "1000px";
 }
 
 
