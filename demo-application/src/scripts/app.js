@@ -112,9 +112,10 @@ function handleFile(X, fileloc){
     fileReader.onload = function(e) {
         var rawText = raw('../scripts/73.txt');
         //detach newline characters from words
-        rawText = rawText.replaceAll("\n", " \n ");
+        rawText = rawText.replaceAll("\r\n\r\n", "&tempHold");
         //detach register return from words
-        rawText = rawText.replaceAll("\r", " \r ");
+        rawText = rawText.replaceAll("\r\n", " ");
+        rawText = rawText.replaceAll("&tempHold"," \n\n\t ")
         //create array of text using space as the delimiting token
         readFile = rawText.split(" ");
         //break points will be used to condense file to specifically the book content
