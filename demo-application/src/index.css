@@ -164,6 +164,13 @@ body {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
+  top: 10%;
+}
+
+.definitionWordQ {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
   top: 23%;
 }
 
@@ -405,7 +412,8 @@ font-size: 20px;
     height: 25%;
     width: 40%;
   }
-  .definitionWord {
+
+  .definitionWordQ {
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
