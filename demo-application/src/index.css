@@ -141,7 +141,7 @@ body {
   white-space: nowrap;
 }
 
-/* DEFENITION PAGE */
+/* DEFINITION PAGE */
 .defPage {
   position: absolute;
   left: 50%;
@@ -346,6 +346,11 @@ font-size: 20px;
   background-color: #A6F0C6;
 }
 
+.defText {
+  overflow-wrap: normal;
+  text-overflow: clip;
+  width: 200px;
+}
 
 /* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {

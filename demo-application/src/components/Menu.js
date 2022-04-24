@@ -16,15 +16,9 @@ const Menu = ({introPageOnClick}) => {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 800) {
-                // if (showMobileMenu) {
-                    setShowMobileMenu(false)
-                //     console.log("Change")
-                // }
+                setShowMobileMenu(false)
             } else {
-                // if (!showMobileMenu) {
-                    setShowMobileMenu(true)
-                //     console.log("Change")
-                // }
+                setShowMobileMenu(true)
             }
         };
         window.addEventListener('resize', handleResize);
