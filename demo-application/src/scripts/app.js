@@ -587,16 +587,19 @@ async function backToBook() {
 function pageReturn(prevPg = null) {
     pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
     var currpg = pageTrack_deserialized;
+    console.log(currpg);
     if (currpg == "null"){
         console.log("in if");
         currpg = "pagenum=1";
         document.cookie = "pagenum=1";
     }
+    console.log(currpg);
     currpg = currpg.split("=");
     if (currpg[1] == NaN || currpg[1] == "NaN"){
         currpg[1] = "1";
         document.cookie = "pagenum=1";
     }
+    console.log(currpg);
     currpg = parseInt(currpg[1], 10);
 
     startidx = (currpg - 1) * stdDiff;
