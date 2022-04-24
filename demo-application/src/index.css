@@ -141,7 +141,7 @@ body {
   white-space: nowrap;
 }
 
-/* DEFENITION PAGE */
+/* DEFINITION PAGE */
 .defPage {
   position: absolute;
   left: 50%;
@@ -156,6 +156,7 @@ body {
   position: absolute;
   top: 30%;
   left: 50%;
+  width: 100%;
   transform: translate(-50%, -50%);
 }
 
@@ -164,6 +165,13 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   top: 10%;
+}
+
+.definitionWordQ {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 23%;
 }
 
 .quizButton {
@@ -204,29 +212,29 @@ body {
 .quizButton1 {
   position: absolute;
   left: 7%;
-  bottom: 40%;
-  height: 25%;
+  bottom: 30%;
+  height: 15%;
   width: 40%;
 }
 .quizButton2 {
   position: absolute;
   right: 10%;
-  bottom: 40%;
-  height: 25%;
+  bottom: 30%;
+  height: 15%;
   width: 40%;
 }
 .quizButton3 {
   position: absolute;
   left: 7%;
   bottom: 10%;
-  height: 25%;
+  height: 15%;
   width: 40%;
 }
 .quizButton4 {
   position: absolute;
   right: 10%;
   bottom: 10%;
-  height: 25%;
+  height: 15%;
   width: 40%;
 }
 
@@ -346,6 +354,11 @@ font-size: 20px;
   background-color: #A6F0C6;
 }
 
+.defText {
+  overflow-wrap: normal;
+  text-overflow: clip;
+  /* width: 200px; */
+}
 
 /* Adding MOBILE VERSION - Mobile first so that it loads faster on mobile devices */
 @media (min-width: 800px) {
@@ -369,5 +382,41 @@ font-size: 20px;
   .defPage {
     height: 90%;
     width: 80%;
+  }
+
+  .quizButton1 {
+    position: absolute;
+    left: 7%;
+    bottom: 40%;
+    height: 25%;
+    width: 40%;
+  }
+  .quizButton2 {
+    position: absolute;
+    right: 10%;
+    bottom: 40%;
+    height: 25%;
+    width: 40%;
+  }
+  .quizButton3 {
+    position: absolute;
+    left: 7%;
+    bottom: 10%;
+    height: 25%;
+    width: 40%;
+  }
+  .quizButton4 {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    height: 25%;
+    width: 40%;
+  }
+
+  .definitionWordQ {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 10%;
   }
 }

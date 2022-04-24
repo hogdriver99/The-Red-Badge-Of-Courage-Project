@@ -85,7 +85,7 @@ const QuizPage = ({text}) => {
     <div className='bookContainer'>
         <div className='book' style={bookStyle}>
           <div className='defPage'>
-            <div className='definitionWord'>
+            <div className='definitionWordQ'>
               {/* Displaying stars */}
               <center>
               <div className='stars'>
