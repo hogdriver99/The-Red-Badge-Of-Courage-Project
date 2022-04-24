@@ -112,9 +112,12 @@ function handleFile(X, fileloc){
     fileReader.onload = function(e) {
         var rawText = raw('../scripts/73.txt');
         //detach newline characters from words
-        rawText = rawText.replaceAll("\n", " \n ");
+        rawText = rawText.replaceAll("\r\n\r\n", "&tempHold");
+        rawText = rawText.replaceAll("\n\n", "&tempHold");
         //detach register return from words
-        rawText = rawText.replaceAll("\r", " \r ");
+        rawText = rawText.replaceAll("\r\n", " ");
+        rawText = rawText.replaceAll("\n", " ");
+        rawText = rawText.replaceAll("&tempHold"," \n\n\t ")
         //create array of text using space as the delimiting token
         readFile = rawText.split(" ");
         //break points will be used to condense file to specifically the book content
@@ -142,7 +145,7 @@ function handleFile(X, fileloc){
         for (let index = 0; index < chapterKeys.length; index++) {
             chapterKeys[index] -= firstbreak;
         }
-        //console.log("File Read.  First word: " + readFile[0]);
+        console.log("File Read.  First word: " + readFile[0]);
         //loads pages
         runPageGet();
         pageReturn();
@@ -205,6 +208,9 @@ function runPageGet(){
 
     //sets the text for the second page
     text2 = pageSet(startidx, endidx, readFile);
+
+    console.log(text1);
+    console.log(text2);
     //loads the text for page 2 onto the page
     document.querySelector(DOMstrings.pageRight).textContent = text2;
 }
@@ -581,9 +587,22 @@ async function backToBook() {
  * @returns No return, return used to force exit early from method
  */
 function pageReturn(prevPg = null) {
+    console.log("entered pageReturn");
     pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
     var currpg = pageTrack_deserialized;
+    console.log(currpg);
+    if (currpg == "null"){
+        console.log("in if");
+        currpg = "pagenum=1";
+        document.cookie = "pagenum=1";
+    }
+    console.log(currpg);
     currpg = currpg.split("=");
+    if (currpg[1] == NaN || currpg[1] == "NaN"){
+        currpg[1] = "1";
+        document.cookie = "pagenum=1";
+    }
+    console.log(currpg);
     currpg = parseInt(currpg[1], 10);
 
     startidx = (currpg - 1) * stdDiff;
@@ -681,6 +700,9 @@ function nextPage(){
     endidx = endidx + stdDiff;
     //set text 2
     text2 = pageSet(startidx, endidx, readFile);
+
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //load text 2 onto page
     document.querySelector(DOMstrings.pageRight).textContent = text2;
 }
@@ -716,6 +738,9 @@ function backPage(){
     //update indices
     startidx = endidx;
     endidx = endidx + stdDiff;
+
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //load text 1 onto page
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
 }
