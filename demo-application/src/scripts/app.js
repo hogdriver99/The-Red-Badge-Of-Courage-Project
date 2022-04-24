@@ -587,7 +587,16 @@ async function backToBook() {
 function pageReturn(prevPg = null) {
     pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
     var currpg = pageTrack_deserialized;
+    if (currpg == "null"){
+        console.log("in if");
+        currpg = "pagenum=1";
+        document.cookie = "pagenum=1";
+    }
     currpg = currpg.split("=");
+    if (currpg[1] == NaN || currpg[1] == "NaN"){
+        currpg[1] = "1";
+        document.cookie = "pagenum=1";
+    }
     currpg = parseInt(currpg[1], 10);
 
     startidx = (currpg - 1) * stdDiff;
@@ -685,6 +694,9 @@ function nextPage(){
     endidx = endidx + stdDiff;
     //set text 2
     text2 = pageSet(startidx, endidx, readFile);
+
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //load text 2 onto page
     document.querySelector(DOMstrings.pageRight).textContent = text2;
 }
@@ -720,6 +732,9 @@ function backPage(){
     //update indices
     startidx = endidx;
     endidx = endidx + stdDiff;
+
+    let pageTrack = JSON.stringify(document.cookie);
+    localStorage.setItem("Key", pageTrack);
     //load text 1 onto page
     document.querySelector(DOMstrings.pageLeft).textContent = text1;
 }
