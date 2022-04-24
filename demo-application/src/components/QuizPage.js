@@ -19,9 +19,15 @@ const QuizPage = ({text}) => {
   const [starsArray, setStarsArray] = useState([false,false,false,false,false]);
   const [silverStars, setSilverStars] = useState(0);
   const [silverStarsArray, setSilverStarsArray] = useState([false,false,false,false,false]);
+  var won = false
 
   let exitQuiz = () => {
     console.log("End")
+
+    var totalStars = stars
+    if (won) {
+      totalStars += 1
+    }
 
     // append new quiz data
     var tempData = localStorage.getItem("data")
@@ -29,7 +35,7 @@ const QuizPage = ({text}) => {
     tempData += ": "
     tempData += silverStars
     tempData += "/5 silver; "
-    tempData += stars
+    tempData += totalStars
     tempData += "/5 gold;\n"
     localStorage.setItem("data", tempData)
 
@@ -57,10 +63,10 @@ const QuizPage = ({text}) => {
       setStarsArray(newArray)
 
       setStars(stars+1)
-      console.log(stars)
-
+      
       //terminate after 5 stars
       if (stars >= 4) {
+        won = true
         exitQuiz()
       }
     } else {
