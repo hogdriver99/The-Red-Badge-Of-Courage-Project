@@ -143,7 +143,7 @@ function handleFile(X, fileloc){
         for (let index = 0; index < chapterKeys.length; index++) {
             chapterKeys[index] -= firstbreak;
         }
-        //console.log("File Read.  First word: " + readFile[0]);
+        console.log("File Read.  First word: " + readFile[0]);
         //loads pages
         runPageGet();
         pageReturn();
@@ -206,6 +206,9 @@ function runPageGet(){
 
     //sets the text for the second page
     text2 = pageSet(startidx, endidx, readFile);
+
+    console.log(text1);
+    console.log(text2);
     //loads the text for page 2 onto the page
     document.querySelector(DOMstrings.pageRight).textContent = text2;
 }
@@ -585,6 +588,7 @@ async function backToBook() {
  * @returns No return, return used to force exit early from method
  */
 function pageReturn(prevPg = null) {
+    console.log("entered pageReturn");
     pageTrack_deserialized = JSON.parse(localStorage.getItem("Key"));
     var currpg = pageTrack_deserialized;
     console.log(currpg);
