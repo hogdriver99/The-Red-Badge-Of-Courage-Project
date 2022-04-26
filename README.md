@@ -35,3 +35,6 @@
     - Added Stephen Crane (author) biography and picture set 
 - Bug Fixes:
     - Fixed OS dependency problems for page load 
+- Known Defects:
+    - Slang words not fully supported
+    - Use of hard word count for pages creates awkward page changes (hard limit part of design per client)
